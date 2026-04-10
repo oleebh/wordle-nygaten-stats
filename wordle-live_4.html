@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🟩 Wordle Champions 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface2: #1e2330;
+    --border: #2a3040;
+    --green: #538d4e;
+    --green-bright: #6aaf63;
+    --green-glow: rgba(83,141,78,0.3);
+    --yellow: #b59f3b;
+    --yellow-bright: #d4b84a;
+    --gray: #3a3a3c;
+    --text: #e8eaf0;
+    --text-muted: #6b7280;
+    --text-dim: #9ca3af;
+    --ole: #60a5fa;
+    --astrid: #f472b6;
+    --erik: #fb923c;
+    --ole-dim: rgba(96,165,250,0.15);
+    --astrid-dim: rgba(244,114,182,0.15);
+    --erik-dim: rgba(251,146,60,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(83,141,78,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 90%, rgba(181,159,59,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* LOADING */
+  #loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 100;
+    transition: opacity 0.4s;
+  }
+  .loading-tiles {
+    display: flex;
+    gap: 6px;
+  }
+  .loading-tile {
+    width: 40px; height: 40px;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    animation: loadingPulse 1.2s ease infinite;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    display: flex; align-items: center; justify-content: center;
+    color: transparent;
+  }
+  .loading-tile:nth-child(1) { animation-delay: 0s; }
+  .loading-tile:nth-child(2) { animation-delay: 0.15s; }
+  .loading-tile:nth-child(3) { animation-delay: 0.3s; }
+  .loading-tile:nth-child(4) { animation-delay: 0.45s; }
+  .loading-tile:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes loadingPulse {
+    0%, 100% { border-color: var(--border); background: transparent; }
+    50% { border-color: var(--green); background: rgba(83,141,78,0.2); }
+  }
+  .loading-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ERROR */
+  #errorBanner {
+    display: none;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #f87171;
+  }
+
+  /* HEADER */
+  header { text-align: center; padding: 52px 0 32px; }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-bright);
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-tag::before, .header-tag::after {
+    content: ''; display: block;
+    width: 30px; height: 1px;
+    background: var(--green);
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 96px);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    background: linear-gradient(135deg, #e8eaf0 0%, var(--green-bright) 60%, var(--yellow-bright) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header-sub { font-size: 14px; color: var(--text-muted); letter-spacing: 0.05em; }
+  .wordle-tiles { display: flex; gap: 4px; justify-content: center; margin: 16px 0 8px; }
+  .tile {
+    width: 36px; height: 36px;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    animation: tileReveal 0.4s ease both;
+  }
+  .tile.green { background: var(--green); border-color: var(--green); color: #fff; }
+  .tile.yellow { background: var(--yellow); border-color: var(--yellow); color: #fff; }
+  .tile.gray { background: var(--gray); border-color: var(--gray); color: #ccc; }
+  .tile:nth-child(1) { animation-delay: 0.0s; }
+  .tile:nth-child(2) { animation-delay: 0.1s; }
+  .tile:nth-child(3) { animation-delay: 0.2s; }
+  .tile:nth-child(4) { animation-delay: 0.3s; }
+  .tile:nth-child(5) { animation-delay: 0.4s; }
+  @keyframes tileReveal {
+    from { transform: rotateX(-90deg) scale(0.8); opacity: 0; }
+    to { transform: rotateX(0deg) scale(1); opacity: 1; }
+  }
+
+  /* REFRESH */
+  .refresh-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .refresh-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 6px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .refresh-btn:hover { border-color: var(--green); color: var(--green-bright); }
+  .refresh-btn.spinning .refresh-icon { animation: spin 0.8s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .last-updated {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* QUARTER SELECTOR */
+  .quarter-bar {
+    display: flex; justify-content: center;
+    gap: 8px; margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .q-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px; font-weight: 500;
+    padding: 8px 20px; border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .q-btn:hover { border-color: var(--green); color: var(--green-bright); }
+  .q-btn.active { background: var(--green); border-color: var(--green-bright); color: #fff; box-shadow: 0 0 20px var(--green-glow); }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PODIUM */
+  .podium { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; align-items: end; margin-bottom: 40px; }
+  .podium-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px 20px 20px;
+    text-align: center; position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .podium-card:hover { transform: translateY(-4px); }
+  .podium-card.rank-1 {
+    padding-top: 32px;
+    background: linear-gradient(180deg, rgba(83,141,78,0.12) 0%, var(--surface) 100%);
+    border-color: var(--green);
+    box-shadow: 0 0 30px rgba(83,141,78,0.2), inset 0 1px 0 rgba(106,175,99,0.3);
+  }
+  .podium-card.rank-2 { border-color: rgba(181,159,59,0.5); }
+  .podium-card.rank-3 { border-color: rgba(139,139,139,0.4); }
+  .rank-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 15px;
+    border: 2px solid var(--bg);
+  }
+  .rank-1 .rank-badge { background: var(--green); color: #fff; }
+  .rank-2 .rank-badge { background: var(--yellow); color: #fff; }
+  .rank-3 .rank-badge { background: var(--gray); color: #ccc; }
+  .player-emoji { font-size: 32px; margin-bottom: 8px; display: block; }
+  .player-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .rank-1 .player-name { color: var(--green-bright); }
+  .rank-2 .player-name { color: var(--yellow-bright); }
+  .rank-3 .player-name { color: var(--text-dim); }
+  .player-avg { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .player-avg-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 12px; }
+  .player-wins { font-size: 12px; color: var(--text-muted); background: var(--surface2); padding: 4px 10px; border-radius: 20px; display: inline-block; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; margin-bottom: 40px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; }
+  .stat-icon { font-size: 24px; flex-shrink: 0; }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--text); }
+  .stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* DISTRIB */
+  .distrib-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 12px; margin-bottom: 40px; }
+  .distrib-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .distrib-title { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .distrib-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .bar-label { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text-muted); width: 20px; text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 20px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; min-width: 2px; }
+  .bar-count { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  /* UKEDAG */
+  .ukedag-grid { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 40px; }
+  .ukedag-table { width: 100%; border-collapse: collapse; }
+  .ukedag-table th { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  .ukedag-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid rgba(42,48,64,0.5); vertical-align: middle; }
+  .ukedag-table tr:last-child td { border-bottom: none; }
+  .ukedag-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .day-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text-dim); text-transform: capitalize; }
+  .day-winner { font-weight: 600; padding: 3px 10px; border-radius: 4px; font-size: 13px; display: inline-block; }
+  .winner-Ole { background: var(--ole-dim); color: var(--ole); }
+  .winner-Astrid { background: var(--astrid-dim); color: var(--astrid); }
+  .winner-Erik { background: var(--erik-dim); color: var(--erik); }
+  .winner-Tie { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+  .day-score { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text-muted); }
+
+  /* LOG */
+  .log-controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+  .filter-btn { font-family: 'DM Mono', monospace; font-size: 12px; padding: 5px 14px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+  .filter-btn.active-ole { background: var(--ole-dim); border-color: var(--ole); color: var(--ole); }
+  .filter-btn.active-astrid { background: var(--astrid-dim); border-color: var(--astrid); color: var(--astrid); }
+  .filter-btn.active-erik { background: var(--erik-dim); border-color: var(--erik); color: var(--erik); }
+  .filter-btn:hover:not([class*=active]) { border-color: var(--text-muted); color: var(--text-dim); }
+  .log-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-height: 420px; overflow-y: auto; }
+  .log-table-wrap::-webkit-scrollbar { width: 6px; }
+  .log-table-wrap::-webkit-scrollbar-track { background: var(--surface2); }
+  .log-table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .log-table { width: 100%; border-collapse: collapse; }
+  .log-table thead { position: sticky; top: 0; z-index: 10; }
+  .log-table th { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding: 12px 14px; text-align: left; background: var(--surface2); border-bottom: 1px solid var(--border); }
+  .log-table td { padding: 9px 14px; font-size: 13px; border-bottom: 1px solid rgba(42,48,64,0.4); font-family: 'DM Mono', monospace; color: var(--text-dim); }
+  .log-table tr:last-child td { border-bottom: none; }
+  .log-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .score-pip { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 4px; font-size: 13px; font-weight: 500; }
+  .pip-2 { background: rgba(83,141,78,0.35); color: #6aaf63; }
+  .pip-3 { background: rgba(83,141,78,0.2); color: #6aaf63; }
+  .pip-4 { background: rgba(255,255,255,0.06); color: var(--text-dim); }
+  .pip-5 { background: rgba(181,159,59,0.15); color: var(--yellow-bright); }
+  .pip-6 { background: rgba(239,68,68,0.15); color: #f87171; }
+  .pip-7 { background: rgba(239,68,68,0.25); color: #f87171; }
+  .player-pill { padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+  .pill-Ole { background: var(--ole-dim); color: var(--ole); }
+  .pill-Astrid { background: var(--astrid-dim); color: var(--astrid); }
+  .pill-Erik { background: var(--erik-dim); color: var(--erik); }
+  .word-tag { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.08em; color: var(--text-dim); }
+
+  @media (max-width: 600px) {
+    .podium { grid-template-columns: 1fr; }
+    .podium-card.rank-1 { order: -1; }
+  }
+  .fade-in { animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loadingScreen">
+  <div class="loading-tiles">
+    <div class="loading-tile">W</div>
+    <div class="loading-tile">O</div>
+    <div class="loading-tile">R</div>
+    <div class="loading-tile">D</div>
+    <div class="loading-tile">S</div>
+  </div>
+  <div class="loading-text">Henter data fra Sheets…</div>
+</div>
+
+<div class="container" id="mainContent" style="opacity:0">
+
+  <header class="fade-in">
+    <div class="header-tag">Jobbkonkurranse 2026</div>
+    <h1>WORDLE<br>CHAMPIONS</h1>
+    <div class="wordle-tiles">
+      <div class="tile green">W</div>
+      <div class="tile yellow">O</div>
+      <div class="tile gray">R</div>
+      <div class="tile green">D</div>
+      <div class="tile green">S</div>
+    </div>
+    <p class="header-sub" id="headerSub"></p>
+  </header>
+
+  <div id="errorBanner"></div>
+
+  <div class="refresh-bar">
+    <button class="refresh-btn" id="refreshBtn" onclick="loadData()">
+      <span class="refresh-icon">↻</span>
+      <span>Oppdater</span>
+    </button>
+    <span class="last-updated" id="lastUpdated"></span>
+  </div>
+
+  <div class="quarter-bar fade-in" id="quarterBar"></div>
+
+  <div class="fade-in">
+    <div class="section-label">🏆 Ledertavle</div>
+    <div class="podium" id="podium"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="section-label">📊 Nøkkeltall</div>
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="section-label">📈 Poengfordeling (lavere = bedre)</div>
+    <div class="distrib-grid" id="distribGrid"></div>
+  </div>
+
+  <div class="fade-in">
+    <div class="section-label">📅 Best per ukedag</div>
+    <div class="ukedag-grid">
+      <table class="ukedag-table" id="ukedagTable"></table>
+    </div>
+  </div>
+
+  <div class="fade-in" style="margin-top:40px">
+    <div class="section-label">📋 Alle resultater</div>
+    <div class="log-controls" id="logControls"></div>
+    <div class="log-table-wrap">
+      <table class="log-table" id="logTable"></table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const API_URL = 'https://script.google.com/macros/s/AKfycby_5d8KkSHqWaczu5bi0TIQ_qs615lrpJg6Si5ZsaavFntiVU7GTmV3B9J08FEp9UdKhQ/exec';
+
+const PLAYERS = ['Ole', 'Astrid', 'Erik'];
+const PLAYER_COLORS = { Ole: '#60a5fa', Astrid: '#f472b6', Erik: '#fb923c' };
+const PLAYER_EMOJIS = { Ole: '🧠', Astrid: '⚡', Erik: '🎯' };
+const UKEDAGER = ['mandag','tirsdag','onsdag','torsdag','fredag'];
+
+let RAW = [];
+let activeQ = 'All';
+let activePlayerFilter = null;
+
+// ─── DATA PARSER ─────────────────────────────────────────────────────────────
+function parseRows(jsonRows) {
+  return jsonRows
+    .filter(r => r['Deltager'] && r['Poeng'] !== '' && r['Poeng'] !== undefined)
+    .map(r => {
+      const poeng = parseInt(r['Poeng']);
+      if (isNaN(poeng)) return null;
+      let dato = r['Dato'] || '';
+      if (typeof dato === 'string' && dato.length > 10) dato = dato.substring(0, 10);
+      return {
+        dato,
+        kvartal: r['Kvartal'] || '',
+        maaned: (r['Måned'] || '').toLowerCase(),
+        ukedag: (r['Ukedag'] || '').toLowerCase(),
+        deltager: r['Deltager'],
+        poeng,
+        ord: r['Dagens ord'] || ''
+      };
+    })
+    .filter(Boolean);
+}
+
+// ─── DATA LOAD ────────────────────────────────────────────────────────────────
+async function loadData() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    RAW = parseRows(json);
+    if (RAW.length === 0) throw new Error('Ingen rader med data funnet');
+    document.getElementById('errorBanner').style.display = 'none';
+    document.getElementById('lastUpdated').textContent = 'Sist hentet: ' + new Date().toLocaleTimeString('no-NO');
+    render();
+    const main = document.getElementById('mainContent');
+    main.style.opacity = '1';
+    main.style.transition = 'opacity 0.4s';
+    const ls = document.getElementById('loadingScreen');
+    ls.style.opacity = '0';
+    setTimeout(() => ls.style.display = 'none', 400);
+  } catch (err) {
+    const eb = document.getElementById('errorBanner');
+    eb.style.display = 'block';
+    eb.textContent = '⚠ Kunne ikke hente data: ' + err.message;
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('mainContent').style.opacity = '1';
+  }
+  btn.classList.remove('spinning');
+}
+
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function avg(arr) { return arr.length ? arr.reduce((a,b) => a+b,0)/arr.length : 0; }
+function filteredByQ() { return activeQ === 'All' ? RAW : RAW.filter(r => r.kvartal === activeQ); }
+function filtered() {
+  let d = filteredByQ();
+  if (activePlayerFilter) d = d.filter(r => r.deltager === activePlayerFilter);
+  return d;
+}
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────────────────────────────
+function buildQuarterBar() {
+  const quarters = ['All', ...new Set(RAW.map(r => r.kvartal))];
+  document.getElementById('quarterBar').innerHTML = quarters.map(q =>
+    `<button class="q-btn${q === activeQ ? ' active' : ''}" onclick="setQ('${q}')">
+      ${q === 'All' ? 'Alle kvartaler' : q}
+    </button>`
+  ).join('');
+}
+
+function setQ(q) { activeQ = q; render(); }
+
+function buildHeader() {
+  const data = filteredByQ();
+  const days = new Set(data.map(r => r.dato)).size;
+  const q = activeQ === 'All' ? 'hele 2026' : activeQ;
+  document.getElementById('headerSub').textContent =
+    `${days} spilledager · ${data.length} resultater · ${q}`;
+}
+
+function buildPodium() {
+  const data = filteredByQ();
+  const stats = PLAYERS.map(p => {
+    const pd = data.filter(r => r.deltager === p);
+    const scores = pd.map(r => r.poeng);
+    const a = avg(scores);
+    const dates = [...new Set(data.map(r => r.dato))];
+    let wins = 0;
+    for (const d of dates) {
+      const day = data.filter(r => r.dato === d);
+      if (day.length < 2) continue;
+      const min = Math.min(...day.map(r => r.poeng));
+      const mine = day.find(r => r.deltager === p);
+      if (mine && mine.poeng === min && day.filter(r => r.poeng === min).length === 1) wins++;
+    }
+    return { name: p, avg: a, wins, best: scores.length ? Math.min(...scores) : '-' };
+  }).sort((a,b) => a.avg - b.avg);
+
+  const order = [1, 0, 2];
+  document.getElementById('podium').innerHTML = order.map(i => {
+    const s = stats[i], rank = i + 1;
+    return `<div class="podium-card rank-${rank}">
+      <div class="rank-badge">${rank}</div>
+      <span class="player-emoji">${PLAYER_EMOJIS[s.name]}</span>
+      <div class="player-name" style="color:${PLAYER_COLORS[s.name]}">${s.name}</div>
+      <div class="player-avg">${s.avg.toFixed(2)}</div>
+      <div class="player-avg-label">snittpoeng</div>
+      <div class="player-wins">${s.wins} daglige seire · beste: ${s.best}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildStats() {
+  const data = filteredByQ();
+  if (!data.length) return;
+  const best = data.reduce((a,b) => b.poeng < a.poeng ? b : a);
+  const worst = data.reduce((a,b) => b.poeng > a.poeng ? b : a);
+  const dates = [...new Set(data.map(r => r.dato))];
+  const winMap = {}; PLAYERS.forEach(p => winMap[p] = 0);
+  for (const d of dates) {
+    const day = data.filter(r => r.dato === d);
+    if (day.length < 2) continue;
+    const min = Math.min(...day.map(r => r.poeng));
+    const winners = day.filter(r => r.poeng === min);
+    if (winners.length === 1) winMap[winners[0].deltager]++;
+  }
+  const topWinner = Object.entries(winMap).sort((a,b) => b[1]-a[1])[0];
+  const stdDevs = PLAYERS.map(p => {
+    const scores = data.filter(r => r.deltager === p).map(r => r.poeng);
+    const m = avg(scores);
+    const sd = Math.sqrt(scores.reduce((a,b) => a+(b-m)**2,0)/scores.length);
+    return { name: p, sd };
+  }).sort((a,b) => a.sd - b.sd);
+
+  const cards = [
+    { icon:'🏅', label:'Flest dagseire', value: topWinner[0], sub: `${topWinner[1]} seire` },
+    { icon:'⚡', label:'Beste enkeltresultat', value:`${best.poeng} poeng`, sub:`${best.deltager} · ${best.ord}` },
+    { icon:'😬', label:'Verste dag', value:`${worst.poeng} poeng`, sub:`${worst.deltager} · ${worst.ord}` },
+    { icon:'🎯', label:'Mest konsistent', value: stdDevs[0].name, sub:`σ = ${stdDevs[0].sd.toFixed(2)}` },
+    { icon:'📅', label:'Spilledager', value: dates.length, sub:`${data.length} registreringer` },
+    { icon:'📊', label:'Snitt alle', value: avg(data.map(r=>r.poeng)).toFixed(2), sub:'poeng per runde' },
+  ];
+  document.getElementById('statsGrid').innerHTML = cards.map(c =>
+    `<div class="stat-card">
+      <div class="stat-icon">${c.icon}</div>
+      <div>
+        <div class="stat-label">${c.label}</div>
+        <div class="stat-value">${c.value}</div>
+        <div class="stat-sub">${c.sub}</div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+function buildDistrib() {
+  const data = filteredByQ();
+  const barColors = { 2:'#6aaf63',3:'#538d4e',4:'#4a5568',5:'#b59f3b',6:'#e53e3e',7:'#c53030' };
+  document.getElementById('distribGrid').innerHTML = PLAYERS.map(p => {
+    const scores = data.filter(r => r.deltager === p).map(r => r.poeng);
+    const counts = {};
+    for (let i=2;i<=7;i++) counts[i] = scores.filter(s=>s===i).length;
+    const maxC = Math.max(...Object.values(counts), 1);
+    return `<div class="distrib-card">
+      <div class="distrib-title">
+        <div class="distrib-dot" style="background:${PLAYER_COLORS[p]}"></div>
+        ${p.toUpperCase()} ${PLAYER_EMOJIS[p]}
+      </div>
+      ${[2,3,4,5,6,7].map(n => {
+        const cnt = counts[n]||0, pct = cnt/maxC*100;
+        return `<div class="bar-row">
+          <div class="bar-label">${n}</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${pct}%;background:${barColors[n]}">
+              ${cnt > 0 ? `<span class="bar-count">${cnt}</span>` : ''}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+
+function buildUkedag() {
+  const data = filteredByQ();
+  const rows = UKEDAGER.map(dag => {
+    const dd = data.filter(r => r.ukedag === dag);
+    if (!dd.length) return '';
+    const avgs = {};
+    PLAYERS.forEach(p => {
+      const sc = dd.filter(r=>r.deltager===p).map(r=>r.poeng);
+      avgs[p] = sc.length ? avg(sc) : null;
+    });
+    const valid = PLAYERS.filter(p=>avgs[p]!==null);
+    const minA = Math.min(...valid.map(p=>avgs[p]));
+    const winners = valid.filter(p=>Math.abs(avgs[p]-minA)<0.001);
+    const w = winners.length===1 ? winners[0] : 'Tie';
+    const fieldAvg = avg(dd.map(r=>r.poeng));
+    return `<tr>
+      <td><span class="day-name">${dag}</span></td>
+      <td><span class="day-winner winner-${w}">${w==='Tie'?'🤝 Uavgjort':`${PLAYER_EMOJIS[w]} ${w}`}</span></td>
+      ${PLAYERS.map(p=>`<td class="day-score" style="color:${avgs[p]!==null?PLAYER_COLORS[p]:'var(--text-muted)'}">${avgs[p]!==null?avgs[p].toFixed(2):'–'}</td>`).join('')}
+      <td class="day-score">${fieldAvg.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('ukedagTable').innerHTML = `
+    <thead><tr>
+      <th>Ukedag</th><th>Vinner</th>
+      ${PLAYERS.map(p=>`<th style="color:${PLAYER_COLORS[p]}">${p}</th>`).join('')}
+      <th>Snitt felt</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>`;
+}
+
+function buildLog() {
+  document.getElementById('logControls').innerHTML =
+    `<span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace">Filtrer:</span>` +
+    PLAYERS.map(p => {
+      const a = activePlayerFilter === p;
+      return `<button class="filter-btn${a?' active-'+p.toLowerCase():''}" onclick="toggleFilter('${p}')">${PLAYER_EMOJIS[p]} ${p}</button>`;
+    }).join('') +
+    (activePlayerFilter ? `<button class="filter-btn" onclick="toggleFilter(null)">✕ Nullstill</button>` : '');
+
+  const logData = [...filtered()].sort((a,b) => b.dato.localeCompare(a.dato));
+  document.getElementById('logTable').innerHTML = `
+    <thead><tr>
+      <th>Dato</th><th>Ord</th><th>Ukedag</th><th>Deltager</th><th>Poeng</th><th>Q</th>
+    </tr></thead>
+    <tbody>${logData.map(r=>`<tr>
+      <td>${r.dato}</td>
+      <td><span class="word-tag">${r.ord}</span></td>
+      <td style="text-transform:capitalize">${r.ukedag}</td>
+      <td><span class="player-pill pill-${r.deltager}">${r.deltager}</span></td>
+      <td><span class="score-pip pip-${r.poeng}">${r.poeng}</span></td>
+      <td style="color:var(--text-muted)">${r.kvartal}</td>
+    </tr>`).join('')}
+    </tbody>`;
+}
+
+function toggleFilter(p) { activePlayerFilter = activePlayerFilter===p?null:p; buildLog(); }
+
+function render() {
+  buildQuarterBar();
+  buildHeader();
+  buildPodium();
+  buildStats();
+  buildDistrib();
+  buildUkedag();
+  buildLog();
+}
+
+// Initial load
+loadData();
+</script>
+</body>
+</html>
