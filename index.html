@@ -22,27 +22,24 @@
   }
   .container { max-width:1100px; margin:0 auto; padding:0 24px 80px; position:relative; z-index:1; }
 
-  /* LOADING */
   #loader { position:fixed; inset:0; background:var(--bg); z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; transition:opacity 0.4s; }
   .loader-tiles { display:flex; gap:6px; }
   .loader-tile { width:44px; height:44px; border:2px solid var(--border); border-radius:4px; font-family:'Bebas Neue',sans-serif; font-size:24px; display:flex; align-items:center; justify-content:center; color:var(--text-dim); animation:lpulse 1.4s ease infinite; }
-  .loader-tile:nth-child(1){animation-delay:0s} .loader-tile:nth-child(2){animation-delay:0.15s} .loader-tile:nth-child(3){animation-delay:0.3s} .loader-tile:nth-child(4){animation-delay:0.45s} .loader-tile:nth-child(5){animation-delay:0.6s} .loader-tile:nth-child(6){animation-delay:0.75s}
+  .loader-tile:nth-child(1){animation-delay:0s} .loader-tile:nth-child(2){animation-delay:.15s} .loader-tile:nth-child(3){animation-delay:.3s} .loader-tile:nth-child(4){animation-delay:.45s} .loader-tile:nth-child(5){animation-delay:.6s} .loader-tile:nth-child(6){animation-delay:.75s}
   @keyframes lpulse { 0%,100%{border-color:var(--border);background:transparent;color:var(--text-dim)} 50%{border-color:var(--green);background:rgba(83,141,78,0.15);color:var(--green-bright)} }
   .loader-text { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); }
 
-  /* HEADER */
   header { text-align:center; padding:52px 0 36px; }
   .eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-bright); margin-bottom:12px; display:inline-flex; align-items:center; gap:10px; }
   .eyebrow::before,.eyebrow::after { content:''; width:28px; height:1px; background:var(--green); display:block; }
   h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,10vw,100px); letter-spacing:0.04em; line-height:0.88; margin-bottom:14px; background:linear-gradient(135deg,#e8eaf0 0%,var(--green-bright) 55%,var(--yellow-bright) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .header-tiles { display:flex; gap:4px; justify-content:center; margin:16px 0 10px; }
+  .header-tiles { display:flex; gap:4px; justify-content:center; margin:16px 0 10px; flex-wrap:wrap; }
   .htile { width:36px; height:36px; border:2px solid var(--border); border-radius:3px; font-family:'Bebas Neue',sans-serif; font-size:20px; display:flex; align-items:center; justify-content:center; animation:tflip 0.5s ease both; }
   .htile:nth-child(1){animation-delay:.05s} .htile:nth-child(2){animation-delay:.15s} .htile:nth-child(3){animation-delay:.25s} .htile:nth-child(4){animation-delay:.35s} .htile:nth-child(5){animation-delay:.45s} .htile:nth-child(6){animation-delay:.55s} .htile:nth-child(7){animation-delay:.65s}
   @keyframes tflip { from{transform:rotateX(-90deg);opacity:0} to{transform:rotateX(0);opacity:1} }
   .htile.g{background:var(--green);border-color:var(--green);color:#fff} .htile.y{background:var(--yellow);border-color:var(--yellow);color:#fff} .htile.x{background:var(--gray);border-color:var(--gray);color:#bbb}
   .header-sub { font-size:13px; color:var(--text-muted); letter-spacing:0.04em; }
 
-  /* TOP BAR */
   .topbar { display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:32px; flex-wrap:wrap; }
   .refresh-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em; padding:7px 16px; border-radius:4px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:6px; }
   .refresh-btn:hover { border-color:var(--green); color:var(--green-bright); }
@@ -50,23 +47,19 @@
   @keyframes spin { to{transform:rotate(360deg)} }
   .updated { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); }
 
-  /* QUARTER TABS */
   .qtabs { display:flex; justify-content:center; gap:8px; margin-bottom:40px; flex-wrap:wrap; }
   .qtab { font-family:'DM Mono',monospace; font-size:12px; font-weight:500; letter-spacing:0.06em; padding:8px 20px; border-radius:4px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .2s; }
   .qtab:hover { border-color:var(--green); color:var(--green-bright); }
   .qtab.on { background:var(--green); border-color:var(--green-bright); color:#fff; box-shadow:0 0 18px rgba(83,141,78,0.3); }
 
-  /* SECTION */
   .slabel { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
   .slabel::after { content:''; flex:1; height:1px; background:var(--border); }
   .section { margin-bottom:40px; }
 
-  /* QUARTER WINNERS BANNER */
+  /* KVARTALSVINNERE */
   .qwinners { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
   .qwcard { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px 20px; display:flex; align-items:center; gap:14px; position:relative; overflow:hidden; }
-  .qwcard::before { content:''; position:absolute; inset:0; opacity:0.06; }
   .qwcard.qw-ongoing { border-color:var(--green); box-shadow:0 0 20px rgba(83,141,78,0.15); }
-  .qwcard.qw-ongoing::before { background:var(--green); }
   .qw-quarter { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:0.05em; color:var(--text-muted); flex-shrink:0; }
   .qw-ongoing .qw-quarter { color:var(--green-bright); }
   .qw-info { flex:1; }
@@ -92,14 +85,14 @@
   .ptotal { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); margin-bottom:10px; }
   .pwins { font-size:12px; color:var(--text-muted); background:var(--surface2); padding:4px 10px; border-radius:20px; display:inline-block; }
 
-  /* STAT CARDS */
+  /* NØKKELTALL */
   .stat-filter { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
   .sfbtn { font-family:'DM Mono',monospace; font-size:12px; padding:5px 14px; border-radius:4px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .15s; }
   .sfbtn:hover { border-color:var(--text-muted); color:var(--text-dim); }
-  .sfbtn.sfOle{background:var(--ole-dim);border-color:var(--ole);color:var(--ole)}
-  .sfbtn.sfAstrid{background:var(--astrid-dim);border-color:var(--astrid);color:var(--astrid)}
-  .sfbtn.sfErik{background:var(--erik-dim);border-color:var(--erik);color:var(--erik)}
-  .sfbtn.sfAll{background:rgba(83,141,78,0.15);border-color:var(--green);color:var(--green-bright)}
+  .sfbtn.active-all { background:rgba(83,141,78,0.15); border-color:var(--green); color:var(--green-bright); }
+  .sfbtn.active-Ole { background:var(--ole-dim); border-color:var(--ole); color:var(--ole); }
+  .sfbtn.active-Astrid { background:var(--astrid-dim); border-color:var(--astrid); color:var(--astrid); }
+  .sfbtn.active-Erik { background:var(--erik-dim); border-color:var(--erik); color:var(--erik); }
   .sgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
   .scard { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:18px 20px; display:flex; align-items:center; gap:14px; }
   .sicon { font-size:22px; flex-shrink:0; }
@@ -118,7 +111,7 @@
   .bfill { height:100%; border-radius:3px; display:flex; align-items:center; justify-content:flex-end; padding-right:5px; transition:width .7s cubic-bezier(.34,1.56,.64,1); }
   .bcnt { font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,.75); }
 
-  /* UKEDAG TABLE */
+  /* UKEDAG */
   .utable { width:100%; border-collapse:collapse; }
   .utable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:12px 16px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
   .utable td { padding:11px 16px; font-size:14px; border-bottom:1px solid rgba(42,48,64,0.45); vertical-align:middle; }
@@ -129,19 +122,20 @@
   .wOle{background:var(--ole-dim);color:var(--ole)} .wAstrid{background:var(--astrid-dim);color:var(--astrid)} .wErik{background:var(--erik-dim);color:var(--erik)} .wTie{background:rgba(255,255,255,.05);color:var(--text-muted)}
   .dscore { font-family:'DM Mono',monospace; font-size:13px; }
 
-  /* WORD DIFFICULTY TABLE */
-  .wtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:440px; overflow-y:auto; }
+  /* ORD-TABELL */
+  .wtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:480px; overflow-y:auto; }
   .wtable-wrap::-webkit-scrollbar{width:5px} .wtable-wrap::-webkit-scrollbar-track{background:var(--surface2)} .wtable-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
   .wtable { width:100%; border-collapse:collapse; }
   .wtable thead { position:sticky; top:0; z-index:5; }
-  .wtable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:11px 16px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
-  .wtable td { padding:9px 16px; font-size:13px; border-bottom:1px solid rgba(42,48,64,0.35); font-family:'DM Mono',monospace; color:var(--text-dim); }
+  .wtable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:11px 14px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
+  .wtable td { padding:8px 14px; font-size:13px; border-bottom:1px solid rgba(42,48,64,0.35); font-family:'DM Mono',monospace; color:var(--text-dim); vertical-align:middle; }
   .wtable tr:last-child td { border-bottom:none; }
   .wtable tr:hover td { background:rgba(255,255,255,.02); }
-  .diff-bar { display:inline-flex; align-items:center; gap:8px; width:100%; }
-  .diff-track { flex:1; height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; max-width:120px; }
-  .diff-fill { height:100%; border-radius:4px; }
-  .rank-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-muted); width:24px; }
+  .diff-track { width:70px; height:6px; background:var(--surface2); border-radius:3px; overflow:hidden; display:inline-block; vertical-align:middle; }
+  .diff-fill { height:100%; border-radius:3px; }
+  .who-scores { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
+  .wscore { font-size:11px; padding:2px 7px; border-radius:3px; }
+  .wsOle{background:var(--ole-dim);color:var(--ole)} .wsAstrid{background:var(--astrid-dim);color:var(--astrid)} .wsErik{background:var(--erik-dim);color:var(--erik)}
 
   /* LOG */
   .logcontrols { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
@@ -187,14 +181,19 @@
     <div class="eyebrow">Nygaten Championship 2026</div>
     <h1>WORDLE<br>CHAMPIONS</h1>
     <div class="header-tiles">
-      <div class="htile g">N</div><div class="htile y">Y</div><div class="htile x">G</div>
-      <div class="htile g">A</div><div class="htile g">T</div><div class="htile g">E</div><div class="htile g">N</div>
+      <div class="htile g">N</div>
+      <div class="htile g">Y</div>
+      <div class="htile y">G</div>
+      <div class="htile g">A</div>
+      <div class="htile x">T</div>
+      <div class="htile g">E</div>
+      <div class="htile g">N</div>
     </div>
     <div class="header-sub" id="headerSub"></div>
   </header>
 
   <div class="topbar">
-    <button class="refresh-btn" id="refreshBtn" onclick="reload()">
+    <button class="refresh-btn" onclick="reload()">
       <span id="refreshIcon">↻</span> Oppdater
     </button>
     <span class="updated" id="updatedAt"></span>
@@ -203,38 +202,33 @@
   <div class="errbanner" id="errBanner"></div>
   <div class="qtabs" id="qtabs"></div>
 
-  <!-- KVARTALSVINNERE — alltid synlig -->
   <div class="section">
     <div class="slabel">🥇 Kvartalsvinnere</div>
     <div class="qwinners" id="qwinners"></div>
   </div>
 
-  <!-- PODIUM -->
   <div class="section">
     <div class="slabel">🏆 Ledertavle</div>
     <div class="podium" id="podium"></div>
   </div>
 
-  <!-- NØKKELTALL MED PERSONFILTER -->
   <div class="section">
     <div class="slabel">📊 Nøkkeltall</div>
     <div class="stat-filter">
       <span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace">Vis:</span>
-      <button class="sfbtn sfAll" onclick="setStatP(null)">Alle</button>
-      <button class="sfbtn" id="sfOle" onclick="setStatP('Ole')">🧠 Ole</button>
-      <button class="sfbtn" id="sfAstrid" onclick="setStatP('Astrid')">⚡ Astrid</button>
-      <button class="sfbtn" id="sfErik" onclick="setStatP('Erik')">🎯 Erik</button>
+      <button class="sfbtn" id="sf-all"  onclick="setStatP(null)">Alle</button>
+      <button class="sfbtn" id="sf-Ole"    onclick="setStatP('Ole')">🧠 Ole</button>
+      <button class="sfbtn" id="sf-Astrid" onclick="setStatP('Astrid')">⚡ Astrid</button>
+      <button class="sfbtn" id="sf-Erik"   onclick="setStatP('Erik')">🎯 Erik</button>
     </div>
     <div class="sgrid" id="sgrid"></div>
   </div>
 
-  <!-- POENGFORDELING -->
   <div class="section">
     <div class="slabel">📈 Poengfordeling</div>
     <div class="dgrid" id="dgrid"></div>
   </div>
 
-  <!-- UKEDAG -->
   <div class="section">
     <div class="slabel">📅 Best per ukedag</div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
@@ -242,7 +236,6 @@
     </div>
   </div>
 
-  <!-- ORD-VANSKELIGHETSGRAD -->
   <div class="section">
     <div class="slabel">🔤 Ord rangert — lettest til vanskeligst</div>
     <div class="wtable-wrap">
@@ -250,7 +243,6 @@
     </div>
   </div>
 
-  <!-- LOGG -->
   <div class="section">
     <div class="slabel">📋 Alle resultater</div>
     <div class="logcontrols" id="logcontrols"></div>
@@ -263,23 +255,37 @@
 <script>
 const API = 'https://script.google.com/macros/s/AKfycby_5d8KkSHqWaczu5bi0TIQ_qs615lrpJg6Si5ZsaavFntiVU7GTmV3B9J08FEp9UdKhQ/exec';
 const PLAYERS = ['Ole','Astrid','Erik'];
-const COLOR = {Ole:'#60a5fa', Astrid:'#f472b6', Erik:'#fb923c'};
-const EMOJI = {Ole:'🧠', Astrid:'⚡', Erik:'🎯'};
+const COLOR  = {Ole:'#60a5fa', Astrid:'#f472b6', Erik:'#fb923c'};
+const EMOJI  = {Ole:'🧠', Astrid:'⚡', Erik:'🎯'};
 const UKEDAGER = ['mandag','tirsdag','onsdag','torsdag','fredag'];
 const BARCOL = {2:'#6aaf63',3:'#538d4e',4:'#4a5568',5:'#b59f3b',6:'#e05252',7:'#c53030'};
 
-let DATA = [];
-let activeQ = 'All';
-let activeP = null;   // log filter
-let activeStatP = null; // stats filter
+// Quarter date ranges — determines if a quarter is ongoing based on today's date
+const Q_RANGES = {
+  Q1: { start: '2026-01-01', end: '2026-03-31' },
+  Q2: { start: '2026-04-01', end: '2026-06-30' },
+  Q3: { start: '2026-07-01', end: '2026-09-30' },
+  Q4: { start: '2026-10-01', end: '2026-12-31' },
+};
+
+let DATA      = [];
+let activeQ   = 'All';
+let activeP   = null;   // log filter
+let activeStatP = null; // stats filter — null = "Alle"
 
 function parseData(json) {
   return json
     .filter(r => r.Deltager && !isNaN(parseInt(r.Poeng)))
     .map(r => {
       const d = new Date(new Date(r.Dato).getTime() + 60*60*1000);
-      const dato = d.toISOString().slice(0,10);
-      return { dato, kvartal: r.Kvartal, ukedag: (r.Ukedag||'').toLowerCase(), deltager: r.Deltager, poeng: parseInt(r.Poeng), ord: r['Dagens ord']||'' };
+      return {
+        dato: d.toISOString().slice(0,10),
+        kvartal: r.Kvartal,
+        ukedag: (r.Ukedag||'').toLowerCase(),
+        deltager: r.Deltager,
+        poeng: parseInt(r.Poeng),
+        ord: r['Dagens ord']||''
+      };
     });
 }
 
@@ -307,31 +313,25 @@ async function reload() {
   icon.className = '';
 }
 
-function avg(arr) { return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
-function byQ() { return activeQ === 'All' ? DATA : DATA.filter(r=>r.kvartal===activeQ); }
-function byQP() { let d=byQ(); if(activeP) d=d.filter(r=>r.deltager===activeP); return d; }
+const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
+const byQ = () => activeQ === 'All' ? DATA : DATA.filter(r=>r.kvartal===activeQ);
+const byQP = () => { let d=byQ(); return activeP ? d.filter(r=>r.deltager===activeP) : d; };
+const getQuarters = () => [...new Set(DATA.map(r=>r.kvartal))].sort();
 
-function getQuarters() { return [...new Set(DATA.map(r=>r.kvartal))].sort(); }
+// A quarter is ongoing if today falls within its date range
+function isOngoing(q) {
+  const range = Q_RANGES[q];
+  if (!range) return false;
+  const today = new Date().toISOString().slice(0,10);
+  return today >= range.start && today <= range.end;
+}
 
 function quarterWinner(q) {
   const data = DATA.filter(r=>r.kvartal===q);
   if (!data.length) return null;
-  const stats = PLAYERS.map(p => {
-    const sc = data.filter(r=>r.deltager===p).map(r=>r.poeng);
-    return {name:p, avg: sc.length ? avg(sc) : 999, count: sc.length};
-  }).sort((a,b)=>a.avg-b.avg);
-  return stats[0];
-}
-
-function isOngoing(q) {
-  // Check if there are any records in this quarter with recent dates
-  const data = DATA.filter(r=>r.kvartal===q);
-  if (!data.length) return false;
-  const latest = data.map(r=>r.dato).sort().pop();
-  const now = new Date().toISOString().slice(0,10);
-  // Ongoing if latest record is within last 14 days
-  const diff = (new Date(now) - new Date(latest)) / 86400000;
-  return diff < 14;
+  return PLAYERS
+    .map(p => { const sc=data.filter(r=>r.deltager===p).map(r=>r.poeng); return {name:p, avg:sc.length?avg(sc):999, total:sc.reduce((a,b)=>a+b,0)}; })
+    .sort((a,b)=>a.avg-b.avg)[0];
 }
 
 function render() {
@@ -340,7 +340,6 @@ function render() {
   const days = new Set(data.map(r=>r.dato)).size;
   document.getElementById('headerSub').textContent =
     `${days} spilledager · ${data.length} resultater · ${activeQ==='All'?'hele 2026':activeQ}`;
-
   document.getElementById('qtabs').innerHTML =
     ['All',...quarters].map(q=>
       `<button class="qtab${q===activeQ?' on':''}" onclick="setQ('${q}')">${q==='All'?'Alle kvartaler':q}</button>`
@@ -348,6 +347,7 @@ function render() {
 
   buildQwinners(quarters);
   buildPodium(data);
+  updateStatButtons();
   buildStats(data);
   buildDistrib(data);
   buildUkedag(data);
@@ -357,20 +357,18 @@ function render() {
 
 function setQ(q) { activeQ=q; render(); }
 
-// ── KVARTALSVINNERE ────────────────────────────────────────────────────────
+// ── KVARTALSVINNERE ───────────────────────────────────────────────────────
 function buildQwinners(quarters) {
   document.getElementById('qwinners').innerHTML = quarters.map(q => {
     const w = quarterWinner(q);
     if (!w) return '';
     const ongoing = isOngoing(q);
-    const data = DATA.filter(r=>r.kvartal===q);
-    const total = data.filter(r=>r.deltager===w.name).reduce((a,b)=>a+b.poeng,0);
     return `<div class="qwcard${ongoing?' qw-ongoing':''}">
       <div class="qw-quarter">${q}</div>
       <div class="qw-info">
         <div class="qw-label">${ongoing?'Leder nå':'Vinner'}</div>
         <div class="qw-name" style="color:${COLOR[w.name]}">${EMOJI[w.name]} ${w.name}</div>
-        <div class="qw-detail">snitt ${w.avg.toFixed(2)} · total ${total} poeng</div>
+        <div class="qw-detail">snitt ${w.avg.toFixed(2)} · total ${w.total} poeng</div>
       </div>
       <div class="qw-trophy">${ongoing?'🔥':'🏆'}</div>
     </div>`;
@@ -387,7 +385,7 @@ function buildPodium(data) {
     let wins = 0;
     for (const d of dates) {
       const day = data.filter(r=>r.dato===d);
-      if (day.length < 2) continue;
+      if (day.length<2) continue;
       const min = Math.min(...day.map(r=>r.poeng));
       const mine = day.find(r=>r.deltager===p);
       if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) wins++;
@@ -397,7 +395,7 @@ function buildPodium(data) {
 
   const order = [1,0,2];
   document.getElementById('podium').innerHTML = order.map(i => {
-    const s = stats[i], rank = i+1;
+    const s=stats[i], rank=i+1;
     return `<div class="pcard r${rank}">
       <div class="pbadge">${rank}</div>
       <span class="pemoji">${EMOJI[s.name]}</span>
@@ -413,77 +411,76 @@ function buildPodium(data) {
 // ── NØKKELTALL ────────────────────────────────────────────────────────────
 function setStatP(p) {
   activeStatP = p;
-  // Update button styles
-  ['Ole','Astrid','Erik'].forEach(name => {
-    const btn = document.getElementById('sf'+name);
-    btn.className = 'sfbtn' + (p===name?' sf'+name:'');
-  });
-  document.querySelectorAll('.sfbtn')[1].className = 'sfbtn' + (p===null?' sfAll':'');
+  updateStatButtons();
   buildStats(byQ());
+}
+
+function updateStatButtons() {
+  // Reset all
+  document.getElementById('sf-all').className   = 'sfbtn' + (activeStatP===null  ? ' active-all'   : '');
+  document.getElementById('sf-Ole').className    = 'sfbtn' + (activeStatP==='Ole'    ? ' active-Ole'    : '');
+  document.getElementById('sf-Astrid').className = 'sfbtn' + (activeStatP==='Astrid' ? ' active-Astrid' : '');
+  document.getElementById('sf-Erik').className   = 'sfbtn' + (activeStatP==='Erik'   ? ' active-Erik'   : '');
 }
 
 function buildStats(allData) {
   const p = activeStatP;
-  const data = p ? allData.filter(r=>r.deltager===p) : allData;
-  if (!data.length) return;
-
   let cards = [];
 
-  if (!p) {
-    // Fellesstatistikk: beste/verste dag er snitt alle tre
+  if (p === null) {
+    // Fellesvisning
     const dates = [...new Set(allData.map(r=>r.dato))];
     const dayAvgs = dates.map(d => {
       const day = allData.filter(r=>r.dato===d);
       return {dato:d, avg:avg(day.map(r=>r.poeng)), ord:day[0]?.ord||''};
     });
-    const bestDay = dayAvgs.reduce((a,b)=>b.avg<a.avg?b:a);
-    const worstDay = dayAvgs.reduce((a,b)=>b.avg>a.avg?b:a);
-
+    const bestDay  = dayAvgs.reduce((a,b)=>b.avg<a.avg?b:a, dayAvgs[0]);
+    const worstDay = dayAvgs.reduce((a,b)=>b.avg>a.avg?b:a, dayAvgs[0]);
     const wm = {}; PLAYERS.forEach(p=>wm[p]=0);
     for (const d of dates) {
       const day = allData.filter(r=>r.dato===d);
       if (day.length<2) continue;
       const min = Math.min(...day.map(r=>r.poeng));
-      const ws = day.filter(r=>r.poeng===min);
+      const ws  = day.filter(r=>r.poeng===min);
       if (ws.length===1) wm[ws[0].deltager]++;
     }
     const top = Object.entries(wm).sort((a,b)=>b[1]-a[1])[0];
-    const sd = PLAYERS.map(p=>{ const sc=allData.filter(r=>r.deltager===p).map(r=>r.poeng); const m=avg(sc); return {name:p,sd:Math.sqrt(sc.reduce((a,b)=>a+(b-m)**2,0)/sc.length)}; }).sort((a,b)=>a.sd-b.sd);
+    const sd  = PLAYERS.map(p=>{ const sc=allData.filter(r=>r.deltager===p).map(r=>r.poeng); const m=avg(sc); return {name:p,sd:Math.sqrt(sc.reduce((a,b)=>a+(b-m)**2,0)/sc.length)}; }).sort((a,b)=>a.sd-b.sd);
 
     cards = [
-      {icon:'🏅', lbl:'Flest dagseire', val:top[0], sub:`${top[1]} seire`},
-      {icon:'🟩', lbl:'Letteste dag (snitt)', val:`${bestDay.avg.toFixed(2)}`, sub:`${bestDay.ord} · ${bestDay.dato}`},
-      {icon:'🟥', lbl:'Vanskeligste dag (snitt)', val:`${worstDay.avg.toFixed(2)}`, sub:`${worstDay.ord} · ${worstDay.dato}`},
-      {icon:'🎯', lbl:'Mest konsistent', val:sd[0].name, sub:`σ = ${sd[0].sd.toFixed(2)}`},
-      {icon:'📅', lbl:'Spilledager', val:dates.length, sub:`${allData.length} registreringer`},
-      {icon:'📊', lbl:'Snitt alle', val:avg(allData.map(r=>r.poeng)).toFixed(2), sub:'poeng per runde'},
+      {icon:'🏅', lbl:'Flest dagseire',          val:top[0],                    sub:`${top[1]} seire`},
+      {icon:'🟩', lbl:'Letteste dag (snitt alle)', val:bestDay.avg.toFixed(2),   sub:`${bestDay.ord} · ${bestDay.dato}`},
+      {icon:'🟥', lbl:'Vanskeligste dag (snitt)',  val:worstDay.avg.toFixed(2),  sub:`${worstDay.ord} · ${worstDay.dato}`},
+      {icon:'🎯', lbl:'Mest konsistent',            val:sd[0].name,              sub:`σ = ${sd[0].sd.toFixed(2)}`},
+      {icon:'📅', lbl:'Spilledager',                val:dates.length,            sub:`${allData.length} registreringer`},
+      {icon:'📊', lbl:'Snitt alle',                 val:avg(allData.map(r=>r.poeng)).toFixed(2), sub:'poeng per runde'},
     ];
   } else {
-    // Personlig statistikk
-    const scores = data.map(r=>r.poeng);
-    const bestR = data.reduce((a,b)=>b.poeng<a.poeng?b:a);
-    const worstR = data.reduce((a,b)=>b.poeng>a.poeng?b:a);
-    const m = avg(scores);
+    // Personvisning
+    const pData  = allData.filter(r=>r.deltager===p);
+    const scores = pData.map(r=>r.poeng);
+    if (!scores.length) return;
+    const bestR  = pData.reduce((a,b)=>b.poeng<a.poeng?b:a);
+    const worstR = pData.reduce((a,b)=>b.poeng>a.poeng?b:a);
+    const m  = avg(scores);
     const sd = Math.sqrt(scores.reduce((a,b)=>a+(b-m)**2,0)/scores.length);
-    // Count wins against others
-    const allDates = [...new Set(allData.map(r=>r.dato))];
-    let wins = 0;
-    for (const d of allDates) {
+    const dates = [...new Set(allData.map(r=>r.dato))];
+    let wins=0, cur=0, best=0;
+    for (const d of dates.sort()) {
       const day = allData.filter(r=>r.dato===d);
       if (day.length<2) continue;
-      const min = Math.min(...day.map(r=>r.poeng));
+      const min  = Math.min(...day.map(r=>r.poeng));
       const mine = day.find(r=>r.deltager===p);
-      if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) wins++;
+      if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) { wins++; cur++; best=Math.max(best,cur); }
+      else cur=0;
     }
-    const streak = getBestStreak(data, allData, p);
-
     cards = [
-      {icon:'⚡', lbl:'Beste resultat', val:`${bestR.poeng} poeng`, sub:`${bestR.ord} · ${bestR.dato}`},
-      {icon:'😬', lbl:'Verste resultat', val:`${worstR.poeng} poeng`, sub:`${worstR.ord} · ${worstR.dato}`},
-      {icon:'📊', lbl:'Snittpoeng', val:m.toFixed(2), sub:`over ${scores.length} runder`},
-      {icon:'🎯', lbl:'Konsistens (σ)', val:sd.toFixed(2), sub:'lavere = mer stabil'},
-      {icon:'🏅', lbl:'Dagseire', val:wins, sub:`av ${allDates.length} spilledager`},
-      {icon:'🔥', lbl:'Beste seiersrekke', val:`${streak} dager`, sub:'flest seire på rad'},
+      {icon:'⚡', lbl:'Beste resultat',   val:`${bestR.poeng} poeng`,  sub:`${bestR.ord} · ${bestR.dato}`},
+      {icon:'😬', lbl:'Verste resultat',  val:`${worstR.poeng} poeng`, sub:`${worstR.ord} · ${worstR.dato}`},
+      {icon:'📊', lbl:'Snittpoeng',        val:m.toFixed(2),            sub:`over ${scores.length} runder`},
+      {icon:'🎯', lbl:'Konsistens (σ)',    val:sd.toFixed(2),           sub:'lavere = mer stabil'},
+      {icon:'🏅', lbl:'Dagseire',          val:wins,                    sub:`av ${dates.length} spilledager`},
+      {icon:'🔥', lbl:'Beste seiersrekke', val:`${best} dager`,         sub:'flest seire på rad'},
     ];
   }
 
@@ -493,20 +490,6 @@ function buildStats(allData) {
       <div><div class="slbl2">${c.lbl}</div><div class="sval">${c.val}</div><div class="ssub">${c.sub}</div></div>
     </div>`
   ).join('');
-}
-
-function getBestStreak(pData, allData, p) {
-  const dates = [...new Set(allData.map(r=>r.dato))].sort();
-  let best=0, cur=0;
-  for (const d of dates) {
-    const day = allData.filter(r=>r.dato===d);
-    if (day.length<2) continue;
-    const min = Math.min(...day.map(r=>r.poeng));
-    const mine = day.find(r=>r.deltager===p);
-    if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) { cur++; best=Math.max(best,cur); }
-    else cur=0;
-  }
-  return best;
 }
 
 // ── FORDELING ─────────────────────────────────────────────────────────────
@@ -533,11 +516,11 @@ function buildUkedag(data) {
   const rows = UKEDAGER.map(dag=>{
     const dd = data.filter(r=>r.ukedag===dag);
     if (!dd.length) return '';
-    const avgs = {}; PLAYERS.forEach(p=>{ const sc=dd.filter(r=>r.deltager===p).map(r=>r.poeng); avgs[p]=sc.length?avg(sc):null; });
-    const valid = PLAYERS.filter(p=>avgs[p]!==null);
-    const minA = Math.min(...valid.map(p=>avgs[p]));
-    const ws = valid.filter(p=>Math.abs(avgs[p]-minA)<0.001);
-    const w = ws.length===1?ws[0]:'Tie';
+    const avgs={}; PLAYERS.forEach(p=>{ const sc=dd.filter(r=>r.deltager===p).map(r=>r.poeng); avgs[p]=sc.length?avg(sc):null; });
+    const valid=PLAYERS.filter(p=>avgs[p]!==null);
+    const minA=Math.min(...valid.map(p=>avgs[p]));
+    const ws=valid.filter(p=>Math.abs(avgs[p]-minA)<0.001);
+    const w=ws.length===1?ws[0]:'Tie';
     return `<tr>
       <td><span class="dayname">${dag}</span></td>
       <td><span class="winner-pill w${w}">${w==='Tie'?'🤝 Uavgjort':`${EMOJI[w]} ${w}`}</span></td>
@@ -546,43 +529,48 @@ function buildUkedag(data) {
     </tr>`;
   }).join('');
   document.getElementById('utable').innerHTML = `
-    <thead><tr><th>Ukedag</th><th>Vinner</th>${PLAYERS.map(p=>`<th style="color:${COLOR[p]}">${p}</th>`).join('')}<th>Snitt</th></tr></thead>
-    <tbody>${rows}</tbody>`;
+    <thead><tr><th>Ukedag</th><th>Vinner</th>
+    ${PLAYERS.map(p=>`<th style="color:${COLOR[p]}">${p}</th>`).join('')}
+    <th>Snitt</th></tr></thead><tbody>${rows}</tbody>`;
 }
 
 // ── ORD-VANSKELIGHETSGRAD ─────────────────────────────────────────────────
+// Scale: 2 = easiest possible, 7 = hardest possible (fixed interval)
 function buildWordDiff(data) {
   const words = {};
   for (const r of data) {
     if (!r.ord) continue;
-    if (!words[r.ord]) words[r.ord] = [];
-    words[r.ord].push(r.poeng);
+    if (!words[r.ord]) words[r.ord] = {};
+    if (!words[r.ord][r.deltager]) words[r.ord][r.deltager] = [];
+    words[r.ord][r.deltager].push(r.poeng);
   }
-  const ranked = Object.entries(words)
-    .map(([ord, scores]) => ({ord, avg: avg(scores), total: scores.reduce((a,b)=>a+b,0), count: scores.length}))
-    .filter(w => w.count >= 1)
-    .sort((a,b) => a.avg - b.avg);
 
-  const minAvg = ranked[0]?.avg || 1;
-  const maxAvg = ranked[ranked.length-1]?.avg || 7;
+  const ranked = Object.entries(words).map(([ord, byPlayer]) => {
+    const allScores = Object.values(byPlayer).flat();
+    return { ord, avg: avg(allScores), byPlayer };
+  }).sort((a,b)=>a.avg-b.avg);
 
   document.getElementById('wtable').innerHTML = `
     <thead><tr>
-      <th>#</th><th>Ord</th><th>Snitt</th><th>Vanskelighet</th><th>Runder</th>
+      <th>#</th><th>Ord</th><th>Snitt</th><th>Vanskelighet</th><th>Hvem fikk hva</th>
     </tr></thead>
     <tbody>${ranked.map((w,i)=>{
-      const pct = (w.avg - minAvg) / (maxAvg - minAvg) * 100;
+      // Fixed scale: 2 = 0%, 7 = 100%
+      const pct = Math.round((w.avg - 2) / (7 - 2) * 100);
       const col = pct < 30 ? '#6aaf63' : pct < 60 ? '#b59f3b' : '#e05252';
+      const whoScores = PLAYERS
+        .filter(p => w.byPlayer[p])
+        .map(p => {
+          const sc = w.byPlayer[p];
+          const val = sc.length===1 ? sc[0] : avg(sc).toFixed(1);
+          return `<span class="wscore ws${p}">${p[0]}: ${val}</span>`;
+        }).join('');
       return `<tr>
-        <td class="rank-num">${i+1}</td>
+        <td style="color:var(--text-muted);font-size:11px">${i+1}</td>
         <td><span class="wordtag">${w.ord}</span></td>
         <td style="color:${col};font-weight:500">${w.avg.toFixed(2)}</td>
-        <td>
-          <div class="diff-bar">
-            <div class="diff-track"><div class="diff-fill" style="width:${pct}%;background:${col}"></div></div>
-          </div>
-        </td>
-        <td style="color:var(--text-muted)">${w.count}</td>
+        <td><div class="diff-track"><div class="diff-fill" style="width:${pct}%;background:${col}"></div></div></td>
+        <td><div class="who-scores">${whoScores}</div></td>
       </tr>`;
     }).join('')}</tbody>`;
 }
