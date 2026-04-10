@@ -332,7 +332,8 @@ let DATA=[]; let activeQ='All'; let activeP=null; let activeStatP=null;
 
 function parseData(json) {
   return json.filter(r=>r.Deltager&&!isNaN(parseInt(r.Poeng))).map(r=>{
-    const d=new Date(new Date(r.Dato).getTime()+60*60*1000);
+    const d = new Date(r.Dato);
+    d.setUTCDate(d.getUTCDate() + 1);
     return {dato:d.toISOString().slice(0,10),kvartal:r.Kvartal,ukedag:(r.Ukedag||'').toLowerCase(),deltager:r.Deltager,poeng:parseInt(r.Poeng),ord:r['Dagens ord']||''};
   });
 }
