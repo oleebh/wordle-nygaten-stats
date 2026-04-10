@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Wordle Championship Nygaten - 2026</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🟩</text></svg>">
+<title>🟩 Wordle Championship Nygaten - 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -165,19 +164,38 @@
   @media(max-width:600px){
     .podium{grid-template-columns:1fr} .pcard.r1{order:-1}
   }
+
+  /* REGISTRER */
+  .regform { background:var(--surface); border:1px solid var(--green); border-radius:8px; padding:24px; }
+  .regform-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; align-items:end; margin-bottom:16px; }
+  .regform-field { display:flex; flex-direction:column; gap:6px; }
+  .regform-field label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); }
+  .regform-field select, .regform-field input {
+    font-family:'DM Mono',monospace; font-size:14px; padding:9px 12px;
+    background:var(--surface2); border:1px solid var(--border); border-radius:4px;
+    color:var(--text); outline:none; transition:border-color .2s; width:100%;
+    -webkit-appearance:none; appearance:none;
+  }
+  .regform-field select:focus, .regform-field input:focus { border-color:var(--green); }
+  .reg-pip-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .reg-pip { width:40px; height:40px; border-radius:4px; border:2px solid var(--border); background:var(--surface2); color:var(--text-muted); font-family:'DM Mono',monospace; font-size:16px; font-weight:500; cursor:pointer; transition:all .15s; display:flex; align-items:center; justify-content:center; }
+  .reg-pip:hover { border-color:var(--green); color:var(--text); }
+  .reg-pip.selected { border-color:var(--green-bright); background:var(--green); color:#fff; }
+  .reg-submit { font-family:'DM Mono',monospace; font-size:13px; letter-spacing:0.08em; padding:10px 28px; border-radius:4px; border:none; background:var(--green); color:#fff; cursor:pointer; transition:all .2s; }
+  .reg-submit:hover { background:var(--green-bright); box-shadow:0 0 16px rgba(83,141,78,0.4); }
+  .reg-submit:disabled { opacity:0.5; cursor:not-allowed; }
+  .reg-feedback { font-family:'DM Mono',monospace; font-size:12px; margin-top:12px; padding:10px 14px; border-radius:4px; display:none; }
+  .reg-feedback.ok  { background:rgba(83,141,78,0.15); color:var(--green-bright); border:1px solid var(--green); }
+  .reg-feedback.err { background:rgba(239,68,68,0.1);  color:#f87171; border:1px solid rgba(239,68,68,0.3); }
+
 </style>
 </head>
 <body>
 
 <div id="loader">
   <div class="loader-tiles">
-    <div class="loader-tile">N</div>
-    <div class="loader-tile">Y</div>
-    <div class="loader-tile">G</div>
-    <div class="loader-tile">A</div>
-    <div class="loader-tile">T</div>
-    <div class="loader-tile">E</div>
-    <div class="loader-tile">N</div>
+    <div class="loader-tile">N</div><div class="loader-tile">Y</div><div class="loader-tile">G</div>
+    <div class="loader-tile">A</div><div class="loader-tile">T</div><div class="loader-tile">E</div>
   </div>
   <div class="loader-text">Henter data…</div>
 </div>
@@ -188,7 +206,7 @@
     <h1>WORDLE<br>CHAMPIONS</h1>
     <div class="header-tiles">
       <div class="htile g">N</div>
-      <div class="htile x">Y</div>
+      <div class="htile g">Y</div>
       <div class="htile y">G</div>
       <div class="htile g">A</div>
       <div class="htile x">T</div>
@@ -250,6 +268,41 @@
   </div>
 
   <div class="section">
+    <div class="slabel">✏️ Registrer resultat</div>
+    <div class="regform">
+      <div class="regform-grid">
+        <div class="regform-field">
+          <label>Navn</label>
+          <select id="reg-navn">
+            <option value="">Velg navn…</option>
+            <option value="Ole">🧠 Ole</option>
+            <option value="Astrid">⚡ Astrid</option>
+            <option value="Erik">🎯 Erik</option>
+          </select>
+        </div>
+        <div class="regform-field">
+          <label>Dato</label>
+          <input type="date" id="reg-dato">
+        </div>
+        <div class="regform-field">
+          <label>Poeng (antall forsøk)</label>
+          <div class="reg-pip-row">
+            <div class="reg-pip" onclick="selectPoeng(1)">1</div>
+            <div class="reg-pip" onclick="selectPoeng(2)">2</div>
+            <div class="reg-pip" onclick="selectPoeng(3)">3</div>
+            <div class="reg-pip" onclick="selectPoeng(4)">4</div>
+            <div class="reg-pip" onclick="selectPoeng(5)">5</div>
+            <div class="reg-pip" onclick="selectPoeng(6)">6</div>
+            <div class="reg-pip" onclick="selectPoeng(7)">7</div>
+          </div>
+        </div>
+      </div>
+      <button class="reg-submit" id="reg-btn" onclick="submitResult()">Lagre resultat →</button>
+      <div class="reg-feedback" id="reg-feedback"></div>
+    </div>
+  </div>
+
+  <div class="section">
     <div class="slabel">📋 Alle resultater</div>
     <div class="logcontrols" id="logcontrols"></div>
     <div class="logtable-wrap">
@@ -259,7 +312,8 @@
 </div>
 
 <script>
-const API = 'https://script.google.com/macros/s/AKfycby_5d8KkSHqWaczu5bi0TIQ_qs615lrpJg6Si5ZsaavFntiVU7GTmV3B9J08FEp9UdKhQ/exec';
+const API      = 'https://script.google.com/macros/s/AKfycby_5d8KkSHqWaczu5bi0TIQ_qs615lrpJg6Si5ZsaavFntiVU7GTmV3B9J08FEp9UdKhQ/exec';
+const POST_API = 'https://script.google.com/macros/s/AKfycby6OQgRyqDMkBEI-DUm2fDPM8L_jn3uoHeFDg9c2GtDSxT1IUw7__gkJZN3sUYwij6Q_g/exec';
 const PLAYERS = ['Ole','Astrid','Erik'];
 const COLOR  = {Ole:'#60a5fa', Astrid:'#f472b6', Erik:'#fb923c'};
 const EMOJI  = {Ole:'🧠', Astrid:'⚡', Erik:'🎯'};
@@ -603,6 +657,69 @@ function buildLog() {
 
 function toggleP(p) { activeP = activeP===p?null:p; buildLog(); }
 
+
+// ── REGISTRER RESULTAT ────────────────────────────────────────────────────
+let selectedPoeng = null;
+
+// Set today's date as default
+function initRegForm() {
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('reg-dato').value = today;
+}
+
+function selectPoeng(n) {
+  selectedPoeng = n;
+  document.querySelectorAll('.reg-pip').forEach((el,i) => {
+    el.classList.toggle('selected', i+1 === n);
+  });
+}
+
+async function submitResult() {
+  const navn  = document.getElementById('reg-navn').value;
+  const dato  = document.getElementById('reg-dato').value;
+  const fb    = document.getElementById('reg-feedback');
+  const btn   = document.getElementById('reg-btn');
+
+  if (!navn)           { showFeedback('Velg navn!', false); return; }
+  if (!dato)           { showFeedback('Velg dato!', false); return; }
+  if (!selectedPoeng)  { showFeedback('Velg poeng!', false); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Lagrer…';
+
+  try {
+    await fetch(POST_API, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ navn, dato, poeng: selectedPoeng })
+    });
+    showFeedback(`✓ ${navn} · ${dato} · ${selectedPoeng} poeng er lagret!`, true);
+    // Reset form
+    document.getElementById('reg-navn').value = '';
+    selectedPoeng = null;
+    document.querySelectorAll('.reg-pip').forEach(el => el.classList.remove('selected'));
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById('reg-dato').value = today;
+    // Refresh data after short delay
+    setTimeout(() => reload(), 1500);
+  } catch(e) {
+    showFeedback('Noe gikk galt: ' + e.message, false);
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Lagre resultat →';
+}
+
+function showFeedback(msg, ok) {
+  const fb = document.getElementById('reg-feedback');
+  fb.textContent = msg;
+  fb.className = 'reg-feedback ' + (ok ? 'ok' : 'err');
+  fb.style.display = 'block';
+  if (ok) setTimeout(() => fb.style.display = 'none', 4000);
+}
+
+initRegForm();
 reload();
 </script>
 </body>
