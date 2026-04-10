@@ -59,7 +59,7 @@
 
   /* KVARTALSVINNERE */
   .qwinners { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
-  .qwcard { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px 20px; display:flex; align-items:center; gap:14px; position:relative; overflow:hidden; }
+  .qwcard { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px 20px; display:flex; align-items:center; gap:14px; }
   .qwcard.qw-ongoing { border-color:var(--green); box-shadow:0 0 20px rgba(83,141,78,0.15); }
   .qw-quarter { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:0.05em; color:var(--text-muted); flex-shrink:0; }
   .qw-ongoing .qw-quarter { color:var(--green-bright); }
@@ -87,8 +87,8 @@
   .pwins { font-size:12px; color:var(--text-muted); background:var(--surface2); padding:4px 10px; border-radius:20px; display:inline-block; }
 
   /* NØKKELTALL */
-  .stat-filter { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
-  .sfbtn { font-family:'DM Mono',monospace; font-size:12px; padding:5px 14px; border-radius:4px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .15s; }
+  .stat-filter { display:flex; gap:6px; margin-bottom:14px; flex-wrap:nowrap; align-items:center; overflow-x:auto; padding-bottom:4px; }
+  .sfbtn { font-family:'DM Mono',monospace; font-size:12px; padding:5px 12px; border-radius:4px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .15s; white-space:nowrap; flex-shrink:0; }
   .sfbtn:hover { border-color:var(--text-muted); color:var(--text-dim); }
   .sfbtn.active-all { background:rgba(83,141,78,0.15); border-color:var(--green); color:var(--green-bright); }
   .sfbtn.active-Ole { background:var(--ole-dim); border-color:var(--ole); color:var(--ole); }
@@ -113,7 +113,8 @@
   .bcnt { font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,.75); }
 
   /* UKEDAG */
-  .utable { width:100%; border-collapse:collapse; }
+  .utable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow-x:auto; }
+  .utable { border-collapse:collapse; min-width:480px; width:100%; }
   .utable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:12px 16px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
   .utable td { padding:11px 16px; font-size:14px; border-bottom:1px solid rgba(42,48,64,0.45); vertical-align:middle; }
   .utable tr:last-child td { border-bottom:none; }
@@ -124,19 +125,37 @@
   .dscore { font-family:'DM Mono',monospace; font-size:13px; }
 
   /* ORD-TABELL */
-  .wtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:480px; overflow-y:auto; }
+  .wtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:480px; overflow-y:auto; overflow-x:auto; }
   .wtable-wrap::-webkit-scrollbar{width:5px} .wtable-wrap::-webkit-scrollbar-track{background:var(--surface2)} .wtable-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-  .wtable { width:100%; border-collapse:collapse; }
+  .wtable { border-collapse:collapse; min-width:420px; width:100%; }
   .wtable thead { position:sticky; top:0; z-index:5; }
   .wtable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:11px 14px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
   .wtable td { padding:8px 14px; font-size:13px; border-bottom:1px solid rgba(42,48,64,0.35); font-family:'DM Mono',monospace; color:var(--text-dim); vertical-align:middle; }
   .wtable tr:last-child td { border-bottom:none; }
   .wtable tr:hover td { background:rgba(255,255,255,.02); }
-  .diff-track { width:70px; height:6px; background:var(--surface2); border-radius:3px; overflow:hidden; display:inline-block; vertical-align:middle; }
+  .diff-track { width:60px; height:6px; background:var(--surface2); border-radius:3px; overflow:hidden; display:inline-block; vertical-align:middle; }
   .diff-fill { height:100%; border-radius:3px; }
-  .who-scores { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
-  .wscore { font-size:11px; padding:2px 7px; border-radius:3px; }
+  .who-scores { display:flex; gap:4px; align-items:center; flex-wrap:nowrap; }
+  .wscore { font-size:11px; padding:2px 5px; border-radius:3px; white-space:nowrap; }
   .wsOle{background:var(--ole-dim);color:var(--ole)} .wsAstrid{background:var(--astrid-dim);color:var(--astrid)} .wsErik{background:var(--erik-dim);color:var(--erik)}
+
+  /* REGISTRER */
+  .regform { background:var(--surface); border:1px solid var(--green); border-radius:8px; padding:24px; }
+  .regform-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; align-items:end; margin-bottom:16px; }
+  .regform-field { display:flex; flex-direction:column; gap:6px; }
+  .regform-field label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); }
+  .regform-field select, .regform-field input { font-family:'DM Mono',monospace; font-size:14px; padding:9px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:4px; color:var(--text); outline:none; transition:border-color .2s; width:100%; -webkit-appearance:none; appearance:none; }
+  .regform-field select:focus, .regform-field input:focus { border-color:var(--green); }
+  .reg-pip-row { display:flex; gap:6px; flex-wrap:nowrap; }
+  .reg-pip { width:36px; height:36px; border-radius:4px; border:2px solid var(--border); background:var(--surface2); color:var(--text-muted); font-family:'DM Mono',monospace; font-size:16px; font-weight:500; cursor:pointer; transition:all .15s; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .reg-pip:hover { border-color:var(--green); color:var(--text); }
+  .reg-pip.selected { border-color:var(--green-bright); background:var(--green); color:#fff; }
+  .reg-submit { font-family:'DM Mono',monospace; font-size:13px; letter-spacing:0.08em; padding:10px 28px; border-radius:4px; border:none; background:var(--green); color:#fff; cursor:pointer; transition:all .2s; }
+  .reg-submit:hover { background:var(--green-bright); box-shadow:0 0 16px rgba(83,141,78,0.4); }
+  .reg-submit:disabled { opacity:0.5; cursor:not-allowed; }
+  .reg-feedback { font-family:'DM Mono',monospace; font-size:12px; margin-top:12px; padding:10px 14px; border-radius:4px; display:none; }
+  .reg-feedback.ok  { background:rgba(83,141,78,0.15); color:var(--green-bright); border:1px solid var(--green); }
+  .reg-feedback.err { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.3); }
 
   /* LOG */
   .logcontrols { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
@@ -145,9 +164,9 @@
   .fbtn.fOle{background:var(--ole-dim);border-color:var(--ole);color:var(--ole)}
   .fbtn.fAstrid{background:var(--astrid-dim);border-color:var(--astrid);color:var(--astrid)}
   .fbtn.fErik{background:var(--erik-dim);border-color:var(--erik);color:var(--erik)}
-  .logtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:400px; overflow-y:auto; }
+  .logtable-wrap { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; max-height:400px; overflow-y:auto; overflow-x:auto; }
   .logtable-wrap::-webkit-scrollbar{width:5px} .logtable-wrap::-webkit-scrollbar-track{background:var(--surface2)} .logtable-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-  .ltable { width:100%; border-collapse:collapse; }
+  .ltable { border-collapse:collapse; min-width:420px; width:100%; }
   .ltable thead { position:sticky; top:0; z-index:5; }
   .ltable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); padding:11px 14px; text-align:left; background:var(--surface2); border-bottom:1px solid var(--border); }
   .ltable td { padding:8px 14px; font-size:13px; border-bottom:1px solid rgba(42,48,64,0.35); font-family:'DM Mono',monospace; color:var(--text-dim); }
@@ -162,33 +181,15 @@
   .wordtag { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:0.08em; color:var(--text-dim); }
   .errbanner { display:none; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:8px; padding:14px 20px; margin-bottom:24px; font-family:'DM Mono',monospace; font-size:13px; color:#f87171; }
 
-  @media(max-width:600px){
-    .podium{grid-template-columns:1fr} .pcard.r1{order:-1}
+  /* MOBILE */
+  @media(max-width:600px) {
+    .podium { grid-template-columns:1fr; }
+    .pcard.r1 { order:-1; }
+    .sgrid { grid-template-columns:repeat(2,1fr); }
+    .regform-grid { grid-template-columns:1fr; }
+    .reg-pip { width:32px; height:32px; font-size:14px; }
+    .htile { width:30px; height:30px; font-size:17px; }
   }
-
-  /* REGISTRER */
-  .regform { background:var(--surface); border:1px solid var(--green); border-radius:8px; padding:24px; }
-  .regform-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; align-items:end; margin-bottom:16px; }
-  .regform-field { display:flex; flex-direction:column; gap:6px; }
-  .regform-field label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); }
-  .regform-field select, .regform-field input {
-    font-family:'DM Mono',monospace; font-size:14px; padding:9px 12px;
-    background:var(--surface2); border:1px solid var(--border); border-radius:4px;
-    color:var(--text); outline:none; transition:border-color .2s; width:100%;
-    -webkit-appearance:none; appearance:none;
-  }
-  .regform-field select:focus, .regform-field input:focus { border-color:var(--green); }
-  .reg-pip-row { display:flex; gap:6px; flex-wrap:nowrap; }
-  .reg-pip { width:36px; height:36px; border-radius:4px; border:2px solid var(--border); background:var(--surface2); color:var(--text-muted); font-family:'DM Mono',monospace; font-size:16px; font-weight:500; cursor:pointer; transition:all .15s; display:flex; align-items:center; justify-content:center; }
-  .reg-pip:hover { border-color:var(--green); color:var(--text); }
-  .reg-pip.selected { border-color:var(--green-bright); background:var(--green); color:#fff; }
-  .reg-submit { font-family:'DM Mono',monospace; font-size:13px; letter-spacing:0.08em; padding:10px 28px; border-radius:4px; border:none; background:var(--green); color:#fff; cursor:pointer; transition:all .2s; }
-  .reg-submit:hover { background:var(--green-bright); box-shadow:0 0 16px rgba(83,141,78,0.4); }
-  .reg-submit:disabled { opacity:0.5; cursor:not-allowed; }
-  .reg-feedback { font-family:'DM Mono',monospace; font-size:12px; margin-top:12px; padding:10px 14px; border-radius:4px; display:none; }
-  .reg-feedback.ok  { background:rgba(83,141,78,0.15); color:var(--green-bright); border:1px solid var(--green); }
-  .reg-feedback.err { background:rgba(239,68,68,0.1);  color:#f87171; border:1px solid rgba(239,68,68,0.3); }
-
 </style>
 </head>
 <body>
@@ -240,8 +241,8 @@
   <div class="section">
     <div class="slabel">📊 Nøkkeltall</div>
     <div class="stat-filter">
-      <span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace">Vis:</span>
-      <button class="sfbtn" id="sf-all"  onclick="setStatP(null)">Alle</button>
+      <span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace;flex-shrink:0">Vis:</span>
+      <button class="sfbtn" id="sf-all"    onclick="setStatP(null)">Alle</button>
       <button class="sfbtn" id="sf-Ole"    onclick="setStatP('Ole')">🧠 Ole</button>
       <button class="sfbtn" id="sf-Astrid" onclick="setStatP('Astrid')">⚡ Astrid</button>
       <button class="sfbtn" id="sf-Erik"   onclick="setStatP('Erik')">🎯 Erik</button>
@@ -256,7 +257,7 @@
 
   <div class="section">
     <div class="slabel">📅 Best per ukedag</div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden">
+    <div class="utable-wrap">
       <table class="utable" id="utable"></table>
     </div>
   </div>
@@ -315,409 +316,204 @@
 <script>
 const API      = 'https://script.google.com/macros/s/AKfycby_5d8KkSHqWaczu5bi0TIQ_qs615lrpJg6Si5ZsaavFntiVU7GTmV3B9J08FEp9UdKhQ/exec';
 const POST_API = 'https://script.google.com/macros/s/AKfycby6OQgRyqDMkBEI-DUm2fDPM8L_jn3uoHeFDg9c2GtDSxT1IUw7__gkJZN3sUYwij6Q_g/exec';
-const PLAYERS = ['Ole','Astrid','Erik'];
-const COLOR  = {Ole:'#60a5fa', Astrid:'#f472b6', Erik:'#fb923c'};
-const EMOJI  = {Ole:'🧠', Astrid:'⚡', Erik:'🎯'};
+const PLAYERS  = ['Ole','Astrid','Erik'];
+const COLOR    = {Ole:'#60a5fa', Astrid:'#f472b6', Erik:'#fb923c'};
+const EMOJI    = {Ole:'🧠', Astrid:'⚡', Erik:'🎯'};
 const UKEDAGER = ['mandag','tirsdag','onsdag','torsdag','fredag'];
-const BARCOL = {2:'#6aaf63',3:'#538d4e',4:'#4a5568',5:'#b59f3b',6:'#e05252',7:'#c53030'};
-
-// Quarter date ranges — determines if a quarter is ongoing based on today's date
+const BARCOL   = {2:'#6aaf63',3:'#538d4e',4:'#4a5568',5:'#b59f3b',6:'#e05252',7:'#c53030'};
 const Q_RANGES = {
-  Q1: { start: '2026-01-01', end: '2026-03-31' },
-  Q2: { start: '2026-04-01', end: '2026-06-30' },
-  Q3: { start: '2026-07-01', end: '2026-09-30' },
-  Q4: { start: '2026-10-01', end: '2026-12-31' },
+  Q1:{start:'2026-01-01',end:'2026-03-31'},
+  Q2:{start:'2026-04-01',end:'2026-06-30'},
+  Q3:{start:'2026-07-01',end:'2026-09-30'},
+  Q4:{start:'2026-10-01',end:'2026-12-31'},
 };
 
-let DATA      = [];
-let activeQ   = 'All';
-let activeP   = null;   // log filter
-let activeStatP = null; // stats filter — null = "Alle"
+let DATA=[]; let activeQ='All'; let activeP=null; let activeStatP=null;
 
 function parseData(json) {
-  return json
-    .filter(r => r.Deltager && !isNaN(parseInt(r.Poeng)))
-    .map(r => {
-      const d = new Date(new Date(r.Dato).getTime() + 60*60*1000);
-      return {
-        dato: d.toISOString().slice(0,10),
-        kvartal: r.Kvartal,
-        ukedag: (r.Ukedag||'').toLowerCase(),
-        deltager: r.Deltager,
-        poeng: parseInt(r.Poeng),
-        ord: r['Dagens ord']||''
-      };
-    });
+  return json.filter(r=>r.Deltager&&!isNaN(parseInt(r.Poeng))).map(r=>{
+    const d=new Date(new Date(r.Dato).getTime()+60*60*1000);
+    return {dato:d.toISOString().slice(0,10),kvartal:r.Kvartal,ukedag:(r.Ukedag||'').toLowerCase(),deltager:r.Deltager,poeng:parseInt(r.Poeng),ord:r['Dagens ord']||''};
+  });
 }
 
 async function reload() {
-  const icon = document.getElementById('refreshIcon');
-  icon.className = 'spin';
+  const icon=document.getElementById('refreshIcon'); icon.className='spin';
   try {
-    const res = await fetch(API);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    DATA = parseData(json);
-    if (!DATA.length) throw new Error('Tom respons');
-    document.getElementById('errBanner').style.display = 'none';
-    document.getElementById('updatedAt').textContent = 'Oppdatert ' + new Date().toLocaleTimeString('no-NO');
+    const res=await fetch(API); if(!res.ok) throw new Error('HTTP '+res.status);
+    const json=await res.json(); DATA=parseData(json);
+    if(!DATA.length) throw new Error('Tom respons');
+    document.getElementById('errBanner').style.display='none';
+    document.getElementById('updatedAt').textContent='Oppdatert '+new Date().toLocaleTimeString('no-NO');
     render();
-    document.getElementById('loader').style.opacity = '0';
-    setTimeout(() => document.getElementById('loader').style.display = 'none', 350);
-    document.getElementById('app').style.display = 'block';
+    document.getElementById('loader').style.opacity='0';
+    setTimeout(()=>document.getElementById('loader').style.display='none',350);
+    document.getElementById('app').style.display='block';
   } catch(e) {
-    document.getElementById('errBanner').style.display = 'block';
-    document.getElementById('errBanner').textContent = '⚠ ' + e.message;
-    document.getElementById('loader').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
+    document.getElementById('errBanner').style.display='block';
+    document.getElementById('errBanner').textContent='⚠ '+e.message;
+    document.getElementById('loader').style.display='none';
+    document.getElementById('app').style.display='block';
   }
-  icon.className = '';
+  icon.className='';
 }
 
-const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
-const byQ = () => activeQ === 'All' ? DATA : DATA.filter(r=>r.kvartal===activeQ);
-const byQP = () => { let d=byQ(); return activeP ? d.filter(r=>r.deltager===activeP) : d; };
-const getQuarters = () => [...new Set(DATA.map(r=>r.kvartal))].sort();
-
-// A quarter is ongoing if today falls within its date range
-function isOngoing(q) {
-  const range = Q_RANGES[q];
-  if (!range) return false;
-  const today = new Date().toISOString().slice(0,10);
-  return today >= range.start && today <= range.end;
-}
-
-function quarterWinner(q) {
-  const data = DATA.filter(r=>r.kvartal===q);
-  if (!data.length) return null;
-  return PLAYERS
-    .map(p => { const sc=data.filter(r=>r.deltager===p).map(r=>r.poeng); return {name:p, avg:sc.length?avg(sc):999, total:sc.reduce((a,b)=>a+b,0)}; })
-    .sort((a,b)=>a.avg-b.avg)[0];
-}
+const avg=arr=>arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;
+const byQ=()=>activeQ==='All'?DATA:DATA.filter(r=>r.kvartal===activeQ);
+const byQP=()=>{let d=byQ();return activeP?d.filter(r=>r.deltager===activeP):d;};
+const getQuarters=()=>[...new Set(DATA.map(r=>r.kvartal))].sort();
+function isOngoing(q){const r=Q_RANGES[q];if(!r)return false;const t=new Date().toISOString().slice(0,10);return t>=r.start&&t<=r.end;}
+function quarterWinner(q){const data=DATA.filter(r=>r.kvartal===q);if(!data.length)return null;return PLAYERS.map(p=>{const sc=data.filter(r=>r.deltager===p).map(r=>r.poeng);return{name:p,avg:sc.length?avg(sc):999,total:sc.reduce((a,b)=>a+b,0)};}).sort((a,b)=>a.avg-b.avg)[0];}
 
 function render() {
-  const data = byQ();
-  const quarters = getQuarters();
-  const days = new Set(data.map(r=>r.dato)).size;
-  document.getElementById('headerSub').textContent =
-    `${days} spilledager · ${data.length} resultater · ${activeQ==='All'?'hele 2026':activeQ}`;
-  document.getElementById('qtabs').innerHTML =
-    ['All',...quarters].map(q=>
-      `<button class="qtab${q===activeQ?' on':''}" onclick="setQ('${q}')">${q==='All'?'Alle kvartaler':q}</button>`
-    ).join('');
-
-  buildQwinners(quarters);
-  buildPodium(data);
-  updateStatButtons();
-  buildStats(data);
-  buildDistrib(data);
-  buildUkedag(data);
-  buildWordDiff(data);
-  buildLog();
+  const data=byQ(), quarters=getQuarters();
+  const days=new Set(data.map(r=>r.dato)).size;
+  document.getElementById('headerSub').textContent=`${days} spilledager · ${data.length} resultater · ${activeQ==='All'?'hele 2026':activeQ}`;
+  document.getElementById('qtabs').innerHTML=['All',...quarters].map(q=>`<button class="qtab${q===activeQ?' on':''}" onclick="setQ('${q}')">${q==='All'?'Alle kvartaler':q}</button>`).join('');
+  buildQwinners(quarters); buildPodium(data); updateStatButtons(); buildStats(data); buildDistrib(data); buildUkedag(data); buildWordDiff(data); buildLog();
 }
 
-function setQ(q) { activeQ=q; render(); }
+function setQ(q){activeQ=q;render();}
 
-// ── KVARTALSVINNERE ───────────────────────────────────────────────────────
-function buildQwinners(quarters) {
-  document.getElementById('qwinners').innerHTML = quarters.map(q => {
-    const w = quarterWinner(q);
-    if (!w) return '';
-    const ongoing = isOngoing(q);
-    return `<div class="qwcard${ongoing?' qw-ongoing':''}">
-      <div class="qw-quarter">${q}</div>
-      <div class="qw-info">
-        <div class="qw-label">${ongoing?'Leder nå':'Vinner'}</div>
-        <div class="qw-name" style="color:${COLOR[w.name]}">${EMOJI[w.name]} ${w.name}</div>
-        <div class="qw-detail">snitt ${w.avg.toFixed(2)} · total ${w.total} poeng</div>
-      </div>
-      <div class="qw-trophy">${ongoing?'🔥':'🏆'}</div>
-    </div>`;
+function buildQwinners(quarters){
+  document.getElementById('qwinners').innerHTML=quarters.map(q=>{
+    const w=quarterWinner(q); if(!w)return '';
+    const ongoing=isOngoing(q);
+    return `<div class="qwcard${ongoing?' qw-ongoing':''}"><div class="qw-quarter">${q}</div><div class="qw-info"><div class="qw-label">${ongoing?'Leder nå':'Vinner'}</div><div class="qw-name" style="color:${COLOR[w.name]}">${EMOJI[w.name]} ${w.name}</div><div class="qw-detail">snitt ${w.avg.toFixed(2)} · total ${w.total} poeng</div></div><div class="qw-trophy">${ongoing?'🔥':'🏆'}</div></div>`;
   }).join('');
 }
 
-// ── PODIUM ────────────────────────────────────────────────────────────────
-function buildPodium(data) {
-  const stats = PLAYERS.map(p => {
-    const scores = data.filter(r=>r.deltager===p).map(r=>r.poeng);
-    const a = avg(scores);
-    const total = scores.reduce((x,y)=>x+y,0);
-    const dates = [...new Set(data.map(r=>r.dato))];
-    let wins = 0;
-    for (const d of dates) {
-      const day = data.filter(r=>r.dato===d);
-      if (day.length<2) continue;
-      const min = Math.min(...day.map(r=>r.poeng));
-      const mine = day.find(r=>r.deltager===p);
-      if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) wins++;
-    }
-    return {name:p, avg:a, total, wins, count:scores.length, best:scores.length?Math.min(...scores):'-'};
+function buildPodium(data){
+  const stats=PLAYERS.map(p=>{
+    const scores=data.filter(r=>r.deltager===p).map(r=>r.poeng);
+    const a=avg(scores), total=scores.reduce((x,y)=>x+y,0);
+    const dates=[...new Set(data.map(r=>r.dato))]; let wins=0;
+    for(const d of dates){const day=data.filter(r=>r.dato===d);if(day.length<2)continue;const min=Math.min(...day.map(r=>r.poeng));const mine=day.find(r=>r.deltager===p);if(mine&&mine.poeng===min&&day.filter(r=>r.poeng===min).length===1)wins++;}
+    return{name:p,avg:a,total,wins,count:scores.length,best:scores.length?Math.min(...scores):'-'};
   }).sort((a,b)=>a.avg-b.avg);
-
-  const order = [1,0,2];
-  document.getElementById('podium').innerHTML = order.map(i => {
-    const s=stats[i], rank=i+1;
-    return `<div class="pcard r${rank}">
-      <div class="pbadge">${rank}</div>
-      <span class="pemoji">${EMOJI[s.name]}</span>
-      <div class="pname" style="color:${COLOR[s.name]}">${s.name}</div>
-      <div class="pavg">${s.avg.toFixed(2)}</div>
-      <div class="pavg-lbl">snittpoeng</div>
-      <div class="ptotal">totalt ${s.total} poeng · ${s.count} runder</div>
-      <div class="pwins">${s.wins} seire · beste: ${s.best}</div>
-    </div>`;
+  const order=[1,0,2];
+  document.getElementById('podium').innerHTML=order.map(i=>{
+    const s=stats[i],rank=i+1;
+    return `<div class="pcard r${rank}"><div class="pbadge">${rank}</div><span class="pemoji">${EMOJI[s.name]}</span><div class="pname" style="color:${COLOR[s.name]}">${s.name}</div><div class="pavg">${s.avg.toFixed(2)}</div><div class="pavg-lbl">snittpoeng</div><div class="ptotal">totalt ${s.total} poeng · ${s.count} runder</div><div class="pwins">${s.wins} seire · beste: ${s.best}</div></div>`;
   }).join('');
 }
 
-// ── NØKKELTALL ────────────────────────────────────────────────────────────
-function setStatP(p) {
-  activeStatP = p;
-  updateStatButtons();
-  buildStats(byQ());
+function setStatP(p){activeStatP=p;updateStatButtons();buildStats(byQ());}
+function updateStatButtons(){
+  document.getElementById('sf-all').className='sfbtn'+(activeStatP===null?' active-all':'');
+  document.getElementById('sf-Ole').className='sfbtn'+(activeStatP==='Ole'?' active-Ole':'');
+  document.getElementById('sf-Astrid').className='sfbtn'+(activeStatP==='Astrid'?' active-Astrid':'');
+  document.getElementById('sf-Erik').className='sfbtn'+(activeStatP==='Erik'?' active-Erik':'');
 }
 
-function updateStatButtons() {
-  // Reset all
-  document.getElementById('sf-all').className   = 'sfbtn' + (activeStatP===null  ? ' active-all'   : '');
-  document.getElementById('sf-Ole').className    = 'sfbtn' + (activeStatP==='Ole'    ? ' active-Ole'    : '');
-  document.getElementById('sf-Astrid').className = 'sfbtn' + (activeStatP==='Astrid' ? ' active-Astrid' : '');
-  document.getElementById('sf-Erik').className   = 'sfbtn' + (activeStatP==='Erik'   ? ' active-Erik'   : '');
-}
-
-function buildStats(allData) {
-  const p = activeStatP;
-  let cards = [];
-
-  if (p === null) {
-    // Fellesvisning
-    const dates = [...new Set(allData.map(r=>r.dato))];
-    const dayAvgs = dates.map(d => {
-      const day = allData.filter(r=>r.dato===d);
-      return {dato:d, avg:avg(day.map(r=>r.poeng)), ord:day[0]?.ord||''};
-    });
-    const bestDay  = dayAvgs.reduce((a,b)=>b.avg<a.avg?b:a, dayAvgs[0]);
-    const worstDay = dayAvgs.reduce((a,b)=>b.avg>a.avg?b:a, dayAvgs[0]);
-    const wm = {}; PLAYERS.forEach(p=>wm[p]=0);
-    for (const d of dates) {
-      const day = allData.filter(r=>r.dato===d);
-      if (day.length<2) continue;
-      const min = Math.min(...day.map(r=>r.poeng));
-      const ws  = day.filter(r=>r.poeng===min);
-      if (ws.length===1) wm[ws[0].deltager]++;
-    }
-    const top = Object.entries(wm).sort((a,b)=>b[1]-a[1])[0];
-    const sd  = PLAYERS.map(p=>{ const sc=allData.filter(r=>r.deltager===p).map(r=>r.poeng); const m=avg(sc); return {name:p,sd:Math.sqrt(sc.reduce((a,b)=>a+(b-m)**2,0)/sc.length)}; }).sort((a,b)=>a.sd-b.sd);
-
-    cards = [
-      {icon:'🏅', lbl:'Flest dagseire',          val:top[0],                    sub:`${top[1]} seire`},
-      {icon:'🟩', lbl:'Letteste dag (snitt alle)', val:bestDay.avg.toFixed(2),   sub:`${bestDay.ord} · ${bestDay.dato}`},
-      {icon:'🟥', lbl:'Vanskeligste dag (snitt)',  val:worstDay.avg.toFixed(2),  sub:`${worstDay.ord} · ${worstDay.dato}`},
-      {icon:'🎯', lbl:'Mest konsistent',            val:sd[0].name,              sub:`σ = ${sd[0].sd.toFixed(2)}`},
-      {icon:'📅', lbl:'Spilledager',                val:dates.length,            sub:`${allData.length} registreringer`},
-      {icon:'📊', lbl:'Snitt alle',                 val:avg(allData.map(r=>r.poeng)).toFixed(2), sub:'poeng per runde'},
+function buildStats(allData){
+  const p=activeStatP; let cards=[];
+  if(p===null){
+    const dates=[...new Set(allData.map(r=>r.dato))];
+    const dayAvgs=dates.map(d=>{const day=allData.filter(r=>r.dato===d);return{dato:d,avg:avg(day.map(r=>r.poeng)),ord:day[0]?.ord||''};});
+    const bestDay=dayAvgs.reduce((a,b)=>b.avg<a.avg?b:a,dayAvgs[0]);
+    const worstDay=dayAvgs.reduce((a,b)=>b.avg>a.avg?b:a,dayAvgs[0]);
+    const wm={}; PLAYERS.forEach(p=>wm[p]=0);
+    for(const d of dates){const day=allData.filter(r=>r.dato===d);if(day.length<2)continue;const min=Math.min(...day.map(r=>r.poeng));const ws=day.filter(r=>r.poeng===min);if(ws.length===1)wm[ws[0].deltager]++;}
+    const top=Object.entries(wm).sort((a,b)=>b[1]-a[1])[0];
+    const sd=PLAYERS.map(p=>{const sc=allData.filter(r=>r.deltager===p).map(r=>r.poeng);const m=avg(sc);return{name:p,sd:Math.sqrt(sc.reduce((a,b)=>a+(b-m)**2,0)/sc.length)};}).sort((a,b)=>a.sd-b.sd);
+    cards=[
+      {icon:'🏅',lbl:'Flest dagseire',val:top[0],sub:`${top[1]} seire`},
+      {icon:'🟩',lbl:'Letteste dag (snitt alle)',val:bestDay.avg.toFixed(2),sub:`${bestDay.ord} · ${bestDay.dato}`},
+      {icon:'🟥',lbl:'Vanskeligste dag (snitt)',val:worstDay.avg.toFixed(2),sub:`${worstDay.ord} · ${worstDay.dato}`},
+      {icon:'🎯',lbl:'Mest konsistent',val:sd[0].name,sub:`σ = ${sd[0].sd.toFixed(2)}`},
+      {icon:'📅',lbl:'Spilledager',val:dates.length,sub:`${allData.length} registreringer`},
+      {icon:'📊',lbl:'Snitt alle',val:avg(allData.map(r=>r.poeng)).toFixed(2),sub:'poeng per runde'},
     ];
   } else {
-    // Personvisning
-    const pData  = allData.filter(r=>r.deltager===p);
-    const scores = pData.map(r=>r.poeng);
-    if (!scores.length) return;
-    const bestR  = pData.reduce((a,b)=>b.poeng<a.poeng?b:a);
-    const worstR = pData.reduce((a,b)=>b.poeng>a.poeng?b:a);
-    const m  = avg(scores);
-    const sd = Math.sqrt(scores.reduce((a,b)=>a+(b-m)**2,0)/scores.length);
-    const dates = [...new Set(allData.map(r=>r.dato))];
-    let wins=0, cur=0, best=0;
-    for (const d of dates.sort()) {
-      const day = allData.filter(r=>r.dato===d);
-      if (day.length<2) continue;
-      const min  = Math.min(...day.map(r=>r.poeng));
-      const mine = day.find(r=>r.deltager===p);
-      if (mine && mine.poeng===min && day.filter(r=>r.poeng===min).length===1) { wins++; cur++; best=Math.max(best,cur); }
-      else cur=0;
-    }
-    cards = [
-      {icon:'⚡', lbl:'Beste resultat',   val:`${bestR.poeng} poeng`,  sub:`${bestR.ord} · ${bestR.dato}`},
-      {icon:'😬', lbl:'Verste resultat',  val:`${worstR.poeng} poeng`, sub:`${worstR.ord} · ${worstR.dato}`},
-      {icon:'📊', lbl:'Snittpoeng',        val:m.toFixed(2),            sub:`over ${scores.length} runder`},
-      {icon:'🎯', lbl:'Konsistens (σ)',    val:sd.toFixed(2),           sub:'lavere = mer stabil'},
-      {icon:'🏅', lbl:'Dagseire',          val:wins,                    sub:`av ${dates.length} spilledager`},
-      {icon:'🔥', lbl:'Beste seiersrekke', val:`${best} dager`,         sub:'flest seire på rad'},
+    const pData=allData.filter(r=>r.deltager===p), scores=pData.map(r=>r.poeng);
+    if(!scores.length)return;
+    const bestR=pData.reduce((a,b)=>b.poeng<a.poeng?b:a);
+    const worstR=pData.reduce((a,b)=>b.poeng>a.poeng?b:a);
+    const m=avg(scores), sd=Math.sqrt(scores.reduce((a,b)=>a+(b-m)**2,0)/scores.length);
+    const dates=[...new Set(allData.map(r=>r.dato))]; let wins=0,cur=0,best=0;
+    for(const d of dates.sort()){const day=allData.filter(r=>r.dato===d);if(day.length<2)continue;const min=Math.min(...day.map(r=>r.poeng));const mine=day.find(r=>r.deltager===p);if(mine&&mine.poeng===min&&day.filter(r=>r.poeng===min).length===1){wins++;cur++;best=Math.max(best,cur);}else cur=0;}
+    cards=[
+      {icon:'⚡',lbl:'Beste resultat',val:`${bestR.poeng} poeng`,sub:`${bestR.ord} · ${bestR.dato}`},
+      {icon:'😬',lbl:'Verste resultat',val:`${worstR.poeng} poeng`,sub:`${worstR.ord} · ${worstR.dato}`},
+      {icon:'📊',lbl:'Snittpoeng',val:m.toFixed(2),sub:`over ${scores.length} runder`},
+      {icon:'🎯',lbl:'Konsistens (σ)',val:sd.toFixed(2),sub:'lavere = mer stabil'},
+      {icon:'🏅',lbl:'Dagseire',val:wins,sub:`av ${dates.length} spilledager`},
+      {icon:'🔥',lbl:'Beste seiersrekke',val:`${best} dager`,sub:'flest seire på rad'},
     ];
   }
-
-  document.getElementById('sgrid').innerHTML = cards.map(c=>
-    `<div class="scard">
-      <div class="sicon">${c.icon}</div>
-      <div><div class="slbl2">${c.lbl}</div><div class="sval">${c.val}</div><div class="ssub">${c.sub}</div></div>
-    </div>`
-  ).join('');
+  document.getElementById('sgrid').innerHTML=cards.map(c=>`<div class="scard"><div class="sicon">${c.icon}</div><div><div class="slbl2">${c.lbl}</div><div class="sval">${c.val}</div><div class="ssub">${c.sub}</div></div></div>`).join('');
 }
 
-// ── FORDELING ─────────────────────────────────────────────────────────────
-function buildDistrib(data) {
-  document.getElementById('dgrid').innerHTML = PLAYERS.map(p=>{
-    const scores = data.filter(r=>r.deltager===p).map(r=>r.poeng);
-    const counts = {}; for(let i=2;i<=7;i++) counts[i]=scores.filter(s=>s===i).length;
-    const mx = Math.max(...Object.values(counts),1);
-    return `<div class="dcard">
-      <div class="dtitle"><div class="ddot" style="background:${COLOR[p]}"></div>${p.toUpperCase()} ${EMOJI[p]}</div>
-      ${[2,3,4,5,6,7].map(n=>{
-        const cnt=counts[n]||0, pct=cnt/mx*100;
-        return `<div class="brow"><div class="blbl">${n}</div>
-          <div class="btrack"><div class="bfill" style="width:${pct}%;background:${BARCOL[n]};min-width:${cnt?2:0}px">
-            ${cnt?`<span class="bcnt">${cnt}</span>`:''}
-          </div></div></div>`;
-      }).join('')}
-    </div>`;
+function buildDistrib(data){
+  document.getElementById('dgrid').innerHTML=PLAYERS.map(p=>{
+    const scores=data.filter(r=>r.deltager===p).map(r=>r.poeng);
+    const counts={}; for(let i=2;i<=7;i++)counts[i]=scores.filter(s=>s===i).length;
+    const mx=Math.max(...Object.values(counts),1);
+    return `<div class="dcard"><div class="dtitle"><div class="ddot" style="background:${COLOR[p]}"></div>${p.toUpperCase()} ${EMOJI[p]}</div>${[2,3,4,5,6,7].map(n=>{const cnt=counts[n]||0,pct=cnt/mx*100;return `<div class="brow"><div class="blbl">${n}</div><div class="btrack"><div class="bfill" style="width:${pct}%;background:${BARCOL[n]};min-width:${cnt?2:0}px">${cnt?`<span class="bcnt">${cnt}</span>`:''}</div></div></div>`;}).join('')}</div>`;
   }).join('');
 }
 
-// ── UKEDAG ────────────────────────────────────────────────────────────────
-function buildUkedag(data) {
-  const rows = UKEDAGER.map(dag=>{
-    const dd = data.filter(r=>r.ukedag===dag);
-    if (!dd.length) return '';
-    const avgs={}; PLAYERS.forEach(p=>{ const sc=dd.filter(r=>r.deltager===p).map(r=>r.poeng); avgs[p]=sc.length?avg(sc):null; });
+function buildUkedag(data){
+  const rows=UKEDAGER.map(dag=>{
+    const dd=data.filter(r=>r.ukedag===dag); if(!dd.length)return '';
+    const avgs={}; PLAYERS.forEach(p=>{const sc=dd.filter(r=>r.deltager===p).map(r=>r.poeng);avgs[p]=sc.length?avg(sc):null;});
     const valid=PLAYERS.filter(p=>avgs[p]!==null);
     const minA=Math.min(...valid.map(p=>avgs[p]));
     const ws=valid.filter(p=>Math.abs(avgs[p]-minA)<0.001);
     const w=ws.length===1?ws[0]:'Tie';
-    return `<tr>
-      <td><span class="dayname">${dag}</span></td>
-      <td><span class="winner-pill w${w}">${w==='Tie'?'🤝 Uavgjort':`${EMOJI[w]} ${w}`}</span></td>
-      ${PLAYERS.map(p=>`<td class="dscore" style="color:${avgs[p]!==null?COLOR[p]:'var(--text-muted)'}">${avgs[p]!==null?avgs[p].toFixed(2):'–'}</td>`).join('')}
-      <td class="dscore" style="color:var(--text-muted)">${avg(dd.map(r=>r.poeng)).toFixed(2)}</td>
-    </tr>`;
+    return `<tr><td><span class="dayname">${dag}</span></td><td><span class="winner-pill w${w}">${w==='Tie'?'🤝 Uavgjort':`${EMOJI[w]} ${w}`}</span></td>${PLAYERS.map(p=>`<td class="dscore" style="color:${avgs[p]!==null?COLOR[p]:'var(--text-muted)'}">${avgs[p]!==null?avgs[p].toFixed(2):'–'}</td>`).join('')}<td class="dscore" style="color:var(--text-muted)">${avg(dd.map(r=>r.poeng)).toFixed(2)}</td></tr>`;
   }).join('');
-  document.getElementById('utable').innerHTML = `
-    <thead><tr><th>Ukedag</th><th>Vinner</th>
-    ${PLAYERS.map(p=>`<th style="color:${COLOR[p]}">${p}</th>`).join('')}
-    <th>Snitt</th></tr></thead><tbody>${rows}</tbody>`;
+  document.getElementById('utable').innerHTML=`<thead><tr><th>Ukedag</th><th>Vinner</th>${PLAYERS.map(p=>`<th style="color:${COLOR[p]}">${p}</th>`).join('')}<th>Snitt</th></tr></thead><tbody>${rows}</tbody>`;
 }
 
-// ── ORD-VANSKELIGHETSGRAD ─────────────────────────────────────────────────
-// Scale: 2 = easiest possible, 7 = hardest possible (fixed interval)
-function buildWordDiff(data) {
-  const words = {};
-  for (const r of data) {
-    if (!r.ord) continue;
-    if (!words[r.ord]) words[r.ord] = {};
-    if (!words[r.ord][r.deltager]) words[r.ord][r.deltager] = [];
-    words[r.ord][r.deltager].push(r.poeng);
-  }
-
-  const ranked = Object.entries(words).map(([ord, byPlayer]) => {
-    const allScores = Object.values(byPlayer).flat();
-    return { ord, avg: avg(allScores), byPlayer };
-  }).sort((a,b)=>a.avg-b.avg);
-
-  document.getElementById('wtable').innerHTML = `
-    <thead><tr>
-      <th>#</th><th>Ord</th><th>Snitt</th><th>Vanskelighet</th><th>Hvem fikk hva</th>
-    </tr></thead>
-    <tbody>${ranked.map((w,i)=>{
-      // Fixed scale: 2 = 0%, 7 = 100%
-      const pct = Math.round((w.avg - 2) / (7 - 2) * 100);
-      const col = pct < 30 ? '#6aaf63' : pct < 60 ? '#b59f3b' : '#e05252';
-      const whoScores = PLAYERS
-        .filter(p => w.byPlayer[p])
-        .map(p => {
-          const sc = w.byPlayer[p];
-          const val = sc.length===1 ? sc[0] : avg(sc).toFixed(1);
-          return `<span class="wscore ws${p}">${p[0]}: ${val}</span>`;
-        }).join('');
-      return `<tr>
-        <td style="color:var(--text-muted);font-size:11px">${i+1}</td>
-        <td><span class="wordtag">${w.ord}</span></td>
-        <td style="color:${col};font-weight:500">${w.avg.toFixed(2)}</td>
-        <td><div class="diff-track"><div class="diff-fill" style="width:${pct}%;background:${col}"></div></div></td>
-        <td><div class="who-scores">${whoScores}</div></td>
-      </tr>`;
-    }).join('')}</tbody>`;
+function buildWordDiff(data){
+  const words={};
+  for(const r of data){if(!r.ord)continue;if(!words[r.ord])words[r.ord]={};if(!words[r.ord][r.deltager])words[r.ord][r.deltager]=[];words[r.ord][r.deltager].push(r.poeng);}
+  const ranked=Object.entries(words).map(([ord,byPlayer])=>{const allScores=Object.values(byPlayer).flat();return{ord,avg:avg(allScores),byPlayer};}).sort((a,b)=>a.avg-b.avg);
+  document.getElementById('wtable').innerHTML=`<thead><tr><th>#</th><th>Ord</th><th>Snitt</th><th>Vanskelighet</th><th>Hvem fikk hva</th></tr></thead><tbody>${ranked.map((w,i)=>{
+    const pct=Math.round((w.avg-2)/(7-2)*100);
+    const col=pct<30?'#6aaf63':pct<60?'#b59f3b':'#e05252';
+    const whoScores=PLAYERS.filter(p=>w.byPlayer[p]).map(p=>{const sc=w.byPlayer[p];const val=sc.length===1?sc[0]:avg(sc).toFixed(1);return `<span class="wscore ws${p}">${p[0]}: ${val}</span>`;}).join('');
+    return `<tr><td style="color:var(--text-muted);font-size:11px">${i+1}</td><td><span class="wordtag">${w.ord}</span></td><td style="color:${col};font-weight:500">${w.avg.toFixed(2)}</td><td><div class="diff-track"><div class="diff-fill" style="width:${pct}%;background:${col}"></div></div></td><td><div class="who-scores">${whoScores}</div></td></tr>`;
+  }).join('')}</tbody>`;
 }
 
-// ── LOGG ──────────────────────────────────────────────────────────────────
-function buildLog() {
-  const data = byQP();
-  document.getElementById('logcontrols').innerHTML =
-    `<span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace">Filter:</span>` +
-    PLAYERS.map(p=>`<button class="fbtn${activeP===p?' f'+p:''}" onclick="toggleP('${p}')">${EMOJI[p]} ${p}</button>`).join('') +
-    (activeP?`<button class="fbtn" onclick="toggleP(null)">✕ Nullstill</button>`:'');
-
-  const rows = [...data].sort((a,b)=>b.dato.localeCompare(a.dato));
-  document.getElementById('ltable').innerHTML = `
-    <thead><tr><th>Dato</th><th>Ord</th><th>Ukedag</th><th>Deltager</th><th>Poeng</th><th>Q</th></tr></thead>
-    <tbody>${rows.map(r=>`<tr>
-      <td>${r.dato}</td><td><span class="wordtag">${r.ord}</span></td>
-      <td style="text-transform:capitalize">${r.ukedag}</td>
-      <td><span class="ppill pp${r.deltager}">${r.deltager}</span></td>
-      <td><span class="pip pip${r.poeng}">${r.poeng}</span></td>
-      <td style="color:var(--text-muted)">${r.kvartal}</td>
-    </tr>`).join('')}</tbody>`;
+function buildLog(){
+  const data=byQP();
+  document.getElementById('logcontrols').innerHTML=`<span style="font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace">Filter:</span>`+PLAYERS.map(p=>`<button class="fbtn${activeP===p?' f'+p:''}" onclick="toggleP('${p}')">${EMOJI[p]} ${p}</button>`).join('')+(activeP?`<button class="fbtn" onclick="toggleP(null)">✕ Nullstill</button>`:'');
+  const rows=[...data].sort((a,b)=>b.dato.localeCompare(a.dato));
+  document.getElementById('ltable').innerHTML=`<thead><tr><th>Dato</th><th>Ord</th><th>Ukedag</th><th>Deltager</th><th>Poeng</th><th>Q</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.dato}</td><td><span class="wordtag">${r.ord}</span></td><td style="text-transform:capitalize">${r.ukedag}</td><td><span class="ppill pp${r.deltager}">${r.deltager}</span></td><td><span class="pip pip${r.poeng}">${r.poeng}</span></td><td style="color:var(--text-muted)">${r.kvartal}</td></tr>`).join('')}</tbody>`;
 }
 
-function toggleP(p) { activeP = activeP===p?null:p; buildLog(); }
+function toggleP(p){activeP=activeP===p?null:p;buildLog();}
 
-
-// ── REGISTRER RESULTAT ────────────────────────────────────────────────────
-let selectedPoeng = null;
-
-// Set today's date as default
-function initRegForm() {
-  const today = new Date().toISOString().slice(0,10);
-  document.getElementById('reg-dato').value = today;
-}
-
-function selectPoeng(n) {
-  selectedPoeng = n;
-  document.querySelectorAll('.reg-pip').forEach((el,i) => {
-    el.classList.toggle('selected', i+1 === n);
-  });
-}
-
-async function submitResult() {
-  const navn  = document.getElementById('reg-navn').value;
-  const dato  = document.getElementById('reg-dato').value;
-  const fb    = document.getElementById('reg-feedback');
-  const btn   = document.getElementById('reg-btn');
-
-  if (!navn)           { showFeedback('Velg navn!', false); return; }
-  if (!dato)           { showFeedback('Velg dato!', false); return; }
-  if (!selectedPoeng)  { showFeedback('Velg poeng!', false); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Lagrer…';
-
+let selectedPoeng=null;
+function initRegForm(){document.getElementById('reg-dato').value=new Date().toISOString().slice(0,10);}
+function selectPoeng(n){selectedPoeng=n;document.querySelectorAll('.reg-pip').forEach((el,i)=>el.classList.toggle('selected',i+1===n));}
+async function submitResult(){
+  const navn=document.getElementById('reg-navn').value;
+  const dato=document.getElementById('reg-dato').value;
+  const btn=document.getElementById('reg-btn');
+  if(!navn){showFeedback('Velg navn!',false);return;}
+  if(!dato){showFeedback('Velg dato!',false);return;}
+  if(!selectedPoeng){showFeedback('Velg poeng!',false);return;}
+  btn.disabled=true; btn.textContent='Lagrer…';
   try {
-    await fetch(POST_API, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ navn, dato, poeng: selectedPoeng })
-    });
-    showFeedback(`✓ ${navn} · ${dato} · ${selectedPoeng} poeng er lagret!`, true);
-    // Reset form
-    document.getElementById('reg-navn').value = '';
-    selectedPoeng = null;
-    document.querySelectorAll('.reg-pip').forEach(el => el.classList.remove('selected'));
-    const today = new Date().toISOString().slice(0,10);
-    document.getElementById('reg-dato').value = today;
-    // Refresh data after short delay
-    setTimeout(() => reload(), 1500);
-  } catch(e) {
-    showFeedback('Noe gikk galt: ' + e.message, false);
-  }
-
-  btn.disabled = false;
-  btn.textContent = 'Lagre resultat →';
+    await fetch(POST_API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({navn,dato,poeng:selectedPoeng})});
+    showFeedback(`✓ ${navn} · ${dato} · ${selectedPoeng} poeng er lagret!`,true);
+    document.getElementById('reg-navn').value='';
+    selectedPoeng=null;
+    document.querySelectorAll('.reg-pip').forEach(el=>el.classList.remove('selected'));
+    document.getElementById('reg-dato').value=new Date().toISOString().slice(0,10);
+    setTimeout(()=>reload(),1500);
+  } catch(e){showFeedback('Noe gikk galt: '+e.message,false);}
+  btn.disabled=false; btn.textContent='Lagre resultat →';
 }
-
-function showFeedback(msg, ok) {
-  const fb = document.getElementById('reg-feedback');
-  fb.textContent = msg;
-  fb.className = 'reg-feedback ' + (ok ? 'ok' : 'err');
-  fb.style.display = 'block';
-  if (ok) setTimeout(() => fb.style.display = 'none', 4000);
+function showFeedback(msg,ok){
+  const fb=document.getElementById('reg-feedback');
+  fb.textContent=msg; fb.className='reg-feedback '+(ok?'ok':'err'); fb.style.display='block';
+  if(ok)setTimeout(()=>fb.style.display='none',4000);
 }
 
 initRegForm();
