@@ -419,8 +419,8 @@ function buildStats(allData){
     const sd=PLAYERS.map(p=>{const sc=allData.filter(r=>r.deltager===p).map(r=>r.poeng);const m=avg(sc);return{name:p,sd:Math.sqrt(sc.reduce((a,b)=>a+(b-m)**2,0)/sc.length)};}).sort((a,b)=>a.sd-b.sd);
     cards=[
       {icon:'🏅',lbl:'Flest dagseire',val:top[0],sub:`${top[1]} seire`},
-      {icon:'🟩',lbl:'Letteste dag (snitt alle)',val:bestDay.avg.toFixed(2),sub:`${bestDay.ord} · ${bestDay.dato}`},
-      {icon:'🟥',lbl:'Vanskeligste dag (snitt)',val:worstDay.avg.toFixed(2),sub:`${worstDay.ord} · ${worstDay.dato}`},
+      {icon:'🟩',lbl:'Letteste dag (snitt alle)',val:bestDay.ord,sub:`${bestDay.avg.toFixed(2)} · ${bestDay.dato}`},
+      {icon:'🟥',lbl:'Vanskeligste dag (snitt)',val:worstDay.ord,sub:`${worstDay.avg.toFixed(2)} · ${worstDay.dato}`},
       {icon:'🎯',lbl:'Mest konsistent',val:sd[0].name,sub:`σ = ${sd[0].sd.toFixed(2)}`},
       {icon:'📅',lbl:'Spilledager',val:dates.length,sub:`${allData.length} registreringer`},
       {icon:'📊',lbl:'Snitt alle',val:avg(allData.map(r=>r.poeng)).toFixed(2),sub:'poeng per runde'},
